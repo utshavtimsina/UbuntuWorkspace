@@ -4515,3 +4515,8 @@ org.eclipse.core.runtime.CoreException: Launch configuration Day3RestApplication
 2019-10-16 13:27:19,701 [Worker-66: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2019-10-16 13:27:19,704 [Worker-66: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2019-10-16 13:27:19,704 [Worker-66: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/utshav/Documents/EclipseWorkspace/Day10_Exception_Handling/src/test/resources
+2019-10-16 15:16:46,005 [Worker-72: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-10-16 15:16:46,102 [Worker-72: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-10-16 15:16:46,119 [Worker-72: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-10-16 15:16:46,148 [Worker-72: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-10-16 15:16:46,148 [Worker-72: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/utshav/Documents/EclipseWorkspace/Day10_Exception_Handling/src/test/resources
