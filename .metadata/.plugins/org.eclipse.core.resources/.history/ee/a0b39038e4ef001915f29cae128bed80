@@ -1,0 +1,18 @@
+package org.famas.main.globalExceptionHandler;
+
+import org.famas.main.exception.BookNotFoundException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+@ControllerAdvice
+public class GlobalExceptionHandler extends RuntimeException{
+	public GlobalExceptionHandler() {
+		// TODO Auto-generated constructor stub
+	}
+	@ExceptionHandler(BookNotFoundException.class)
+	public Object handleBookNotFoundExceptionBook(BookNotFoundException ex) {
+		BookNotFoundException exception =  ex;
+		return exception;
+	}
+	
+}

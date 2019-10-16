@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+	position: relative;
+	background-image: url(login.jpg); //
+	background-repeat: repeat-y; //
+	background-repeat: repeat-y;
+}
+
+table {
+	position: relative;
+}
+
+#div {
+	margin: auto;
+	background-color: #C0C0C0;
+	height: 50%;
+	width: 40%;
+}
+
+hr {
+	background-color: black;
+}
+
+td {
+	vertical-align: top;
+}
+
+input[type="radio"] {
+	vertical-align: bottom;
+	width: 17px;
+	height: 17px;
+}
+</style>
+<meta charset="UTF-8">
+<title>Survey</title>
+</head>
+<body>
+	<h1 align=center>MEMBER SATISFACTION SURVEY</h1>
+	<div id="div">
+		<form action="/survey" method="post">
+
+			<table class="table">
+
+
+			</table>
+			<input type="submit" class="submit" value="Submit">
+		</form>
+	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+
+							$
+									.get(
+											"/getAll",
+											function(data) {
+												//data = jQuery.parseJSON(data);
+												// $( "div" ).append( JSON.stringfy(data));
+												for (j = 0; j < data.length; j++) {
+													var x = '	<tr class="border">	<td>'
+															+ data[j].qName
+															+ '.&nbsp<td>';
+													x += data[j].qDescription
+															+ '</tr>	';
+													for (i = 0; i < data[j].answer.length; i++) {
+														x += '<tr><td><td><input type="radio" class="check" name="'+data[j].qId + "c"+data[j].answer[i].aId+ '">'
+																+ data[j].answer[i].aDescription
+																+ '</tr>		<tr><td>			<td>';
+													}
+													x += '	<tr><td colspan="2"><hr></tr>';
+
+													$("table").append(x);
+													//$("table").append(x);
+													//alert( );
+												}
+											});
+							$('input').click(function(){
+							  //  if($("")[0].checked){
+							       //logic here
+							    //}
+							  alert("");
+							});
+							//if ($(input).is(":checked")){
+								   // do something
+								//   alert("hello");
+							//	}
+
+						});
+	</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+package org.timsina.main.repo;
+
+public interface BookRepo {
+
+}

@@ -1,0 +1,5 @@
+package org.famas.main.exception;
+
+public class ExceptionFormatter {
+
+}

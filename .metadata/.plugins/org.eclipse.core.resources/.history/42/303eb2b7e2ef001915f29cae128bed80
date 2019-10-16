@@ -1,0 +1,5 @@
+package org.famas.main.globalExceptionHandler;
+
+public class GlobalExceptionHandler {
+
+}

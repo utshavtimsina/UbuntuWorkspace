@@ -1,0 +1,5 @@
+package org.famas.main.model;
+
+public class Book {
+
+}

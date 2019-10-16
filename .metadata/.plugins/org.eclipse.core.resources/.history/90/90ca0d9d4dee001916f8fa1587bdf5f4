@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Adding Data</title>
+</head>
+<body>
+<div id="parent" align="center">
+<form action="/saveQuestionAnswers" method="post" >
+		< label>Question:</label><br>
+		<textarea rows="3" cols="50" name="asda"></textarea><br>
+		<label>Answer Type:</label>
+		<input type="radio" name="radio">
+		<label>checkbox</label>
+		<input type="radio" name="radio">
+		<label>radio</label><br><br>
+		<div id="answer">
+		<input type="button" name="add" value="Add answer" id="add"><br><br>
+		<textarea rows="2" cols="40" id="area"></textarea><br>		
+		</div>
+		<input name="hh" type=text> 
+		<input type="submit" value="Submit">
+	</form>
+</div>
+		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	 $(document).ready(function(){
+		 $("#add").click(function(){
+			 var textArea="<textarea rows='2' cols='40'></textarea><br>";
+			 $("#answer").append(textArea);
+			  //alert("clicked"); 
+		 });
+		  
+	 });
+	</script>
+</body>
+
+
+</html>

@@ -1,0 +1,26 @@
+package org.timsina.main.config;
+
+import javax.sql.DataSource;
+
+import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.sqlobject.SqlObjectPlugin;
+import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class JDBIConfig {
+	
+	@Bean
+    public DataSource getDataSource() {
+        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+        return dataSourceBuilder.build();
+    }
+	
+	@Bean
+	public Jdbi jdbiObject(DataSource dataSource) {
+		Jdbi jdbi=Jdbi.create(dataSource);
+		jdbi.installPlugin(new SqlObjectPlugin());
+		return jdbi;
+	}
+}

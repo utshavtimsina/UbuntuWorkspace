@@ -1,0 +1,5 @@
+package org.timsina.main.service;
+
+public interface BookService {
+
+}

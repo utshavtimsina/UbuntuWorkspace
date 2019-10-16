@@ -1,0 +1,5 @@
+package org.famas.main.repository;
+
+public interface Repository {
+
+}

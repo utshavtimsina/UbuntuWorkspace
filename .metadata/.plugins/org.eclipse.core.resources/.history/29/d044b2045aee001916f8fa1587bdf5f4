@@ -1,0 +1,48 @@
+package org.timsina.main.util;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.timsina.main.model.SurveyAnswer;
+import org.timsina.main.service.SurveyAnswerService;
+
+@Configuration
+public class Formatter {
+	@Autowired
+	SurveyAnswerService answerService;
+
+	public Object formatter(String formData) {
+
+		if (formData.contains("&")) {
+
+			String[] data = formData.split("&");
+			for (int i = 0; i < data.length; i++) {
+				String[] Values = data[i].split("=");
+				// String[] Final = Values[0].split("c");
+
+				SurveyAnswer answerGiven = new SurveyAnswer();
+				answerGiven.setqId(Integer.parseInt(Values[0]));
+				answerGiven.setaId(Integer.parseInt(Values[1]));
+				answerService.saveUserSurveyAnswer(answerGiven);
+				// return formData;
+
+			}
+		} else {
+			SurveyAnswer answerGiven = new SurveyAnswer();
+			String[] Values = formData.split("=");
+			answerGiven.setqId(Integer.parseInt(Values[0]));
+			answerGiven.setaId(Integer.parseInt(Values[1]));
+			answerService.saveUserSurveyAnswer(answerGiven);
+			// return Values;
+		}
+		return "Save Success";
+
+	}
+
+	public String questionAnswerFormatter(String questionAnswers) {
+		
+			return null;
+		}
+
+}

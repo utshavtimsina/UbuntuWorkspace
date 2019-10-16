@@ -1,0 +1,17 @@
+package org.timsina.main.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+import org.timsina.main.service.BookService;
+import org.timsina.main.service.impl.BookServiceImpl;
+
+@RestController
+public class BookController {
+	BookService bookService;
+
+	public BookController(BookServiceImpl bookService) {
+		//super();
+		this.bookService = bookService;
+	}
+	
+	
+}

@@ -1,0 +1,14 @@
+package org.famas.main.service.impl;
+
+import org.famas.main.model.Book;
+import org.famas.main.service.BookService;
+
+public class BookServiceImpl implements BookService {
+
+	@Override
+	public Book getBookById(int bookId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
