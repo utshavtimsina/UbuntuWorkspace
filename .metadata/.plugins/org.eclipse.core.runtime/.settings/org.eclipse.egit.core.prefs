@@ -1,4 +1,4 @@
-GitRepositoriesView.GitDirectories=/home/utshav/Documents/EclipseWorkspace/springboot-jdbi-integration/.git\:
-GitRepositoriesView.GitDirectories.relative=springboot-jdbi-integration/.git\:
+GitRepositoriesView.GitDirectories=/home/utshav/Documents/EclipseWorkspace/springboot-jdbi-integration/.git\:/home/utshav/Documents/EclipseWorkspace/.git\:
+GitRepositoriesView.GitDirectories.relative=springboot-jdbi-integration/.git\:.git\:
 core_autoIgnoreDerivedResources=false
 eclipse.preferences.version=1
