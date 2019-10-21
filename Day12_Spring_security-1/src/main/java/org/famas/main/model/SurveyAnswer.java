@@ -22,21 +22,29 @@ public class SurveyAnswer {
 	private int aId;
 	private int qId;
 	private String remarks;
-
+	private Surveys survey;
 	
 
-	public SurveyAnswer() {
-		// super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public SurveyAnswer(int id, int aId, int qId, String remarks) {
-		// super();
+	public SurveyAnswer(int id, int aId, int qId, String remarks, Surveys survey) {
+		super();
 		this.id = id;
 		this.aId = aId;
 		this.qId = qId;
 		this.remarks = remarks;
-		//this.survey = survey;
+		this.survey = survey;
+	}
+
+	public Surveys getSurvey() {
+		return survey;
+	}
+
+	public void setSurvey(Surveys survey) {
+		this.survey = survey;
+	}
+
+	public SurveyAnswer() {
+		// super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getId() {

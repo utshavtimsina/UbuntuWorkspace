@@ -22,18 +22,18 @@ public class Surveys implements Serializable {
 
 	private int uId;
 	
-	private List<SurveyAnswer> surveysAnswer = new ArrayList<>();
+	
 
 	public Surveys() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Surveys(int sId, int uId, List<SurveyAnswer> surveysAnswer) {
-		super();
+	public Surveys(int sId, int uId) {
+		//super();
 		this.sId = sId;
 		this.uId = uId;
-		this.surveysAnswer = surveysAnswer;
+		
 	}
 
 	public int getsId() {
@@ -52,12 +52,6 @@ public class Surveys implements Serializable {
 		this.uId = uId;
 	}
 
-	public List<SurveyAnswer> getSurveysAnswer() {
-		return surveysAnswer;
-	}
-
-	public void setSurveysAnswer(List<SurveyAnswer> surveysAnswer) {
-		this.surveysAnswer = surveysAnswer;
-	}
+	
 
 }
