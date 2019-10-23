@@ -24,7 +24,11 @@ public interface FormRepo {
 	
 	@SqlQuery("SELECT * FROM answer WHERE question_q_id = :qId")
 	@RegisterBeanMapper(Answer.class)
-	public List<Answer> getAnswerById(@Bind int qId );
+	public List<Answer> getAnswerByQid(@Bind int qId );
+	
+	@SqlQuery("SELECT * FROM answer WHERE a_id = :aId")
+	@RegisterBeanMapper(Answer.class)
+	public Answer getAnswerById(@Bind int aId );
 	
 	@SqlUpdate("INSERT INTO question(q_id,q_description,q_name,q_remarks,a_type) VALUES (:qId,:qDescription,:qName,:qRemarks,:aType)")
 	public void saveQuestion(@BindBean Question question);
@@ -38,5 +42,13 @@ public interface FormRepo {
 	
 	@SqlUpdate("INSERT INTO survey_answer(a_id,q_id,remarks,survey_s_id) VALUES (:aId,:qId,:remarks,:id)")
 	public void saveUserSurveyAnswer(@BindBean SurveyAnswer s,@Bind int id);
+	
+	@SqlQuery("SELECT * FROM survey_answer WHERE survey_s_id = :sId")
+	@RegisterBeanMapper(SurveyAnswer.class)
+	public List<SurveyAnswer> getResultsByUserId(@Bind int sId);
+	
+	@SqlQuery("SELECT * FROM surveys")
+	@RegisterBeanMapper(Surveys.class)
+	public List<Surveys> getAllUsers();
 	
 }

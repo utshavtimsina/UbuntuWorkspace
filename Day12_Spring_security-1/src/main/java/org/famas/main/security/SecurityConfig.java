@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.httpBasic()
 			.and()
 			.authorizeRequests()
-			.antMatchers("/questionSavePage","/saveQuestionAnswers").hasAuthority("ROLE_ADMIN")
+			.antMatchers("/questionSavePage","/saveQuestionAnswers","/admin","/adminIndividualResults/*").hasAuthority("ROLE_ADMIN")
 			.antMatchers("/getAll").permitAll()
 			.antMatchers("/*").permitAll()
 			//.antMatchers("/ram").hasAuthority("ROLE_USER")

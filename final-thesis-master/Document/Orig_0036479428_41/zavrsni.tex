@@ -1,0 +1,76 @@
+\documentclass[times, utf8, zavrsni, numeric]{fer}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{url}
+\usepackage{amsmath}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+}
+
+\begin{document}
+
+\thesisnumber{4581}
+
+\title{Očitavanje rukom pisanih slova}
+
+\author{Filip Gulan}
+
+\maketitle
+
+% Ispis stranice s napomenom o umetanju izvornika rada. Uklonite naredbu \izvornik ako žlite izbaciti tu stranicu.
+\izvornik
+
+% Dodavanje zahvale ili prazne stranice. Ako ne želite dodati zahvalu, naredbu ostavite radi prazne stranice.
+\zahvala{Zahvaljujem se mentoru doc.\ dr.\ sc.\ Marku Čupiću na velikoj pomoći i strpljenju prilikom izrade završnog rada te svim prijateljima i kolegama koji su sudjelovali u izradi skupa podataka rukom pisanih znakova.}
+
+\tableofcontents
+
+\chapter{Uvod}
+\input{chapters/intro.tex}
+
+\chapter{Obrada slike}
+\input{chapters/image_processing.tex}
+
+\chapter{Klasifikacija}
+\input{chapters/classification.tex}
+
+\chapter{Izlučivanje značajki}
+\input{chapters/feature_extraction.tex}
+
+\chapter{Učenje i rezultati}
+\input{chapters/results.tex}
+
+\chapter{Zaključak}
+\input{chapters/conclusion.tex}
+
+\bibliography{literatura}
+\bibliographystyle{fer}
+
+\begin{sazetak}
+U ovom radu prikazan je način rada i implementacija sustav za očitavanje rukom pisanih slova koji je projektiran tako da na svoj ulaz primi sliku slova, a na svom izlazu vrati prepoznato slovo. Primljena slika se obrađuje te se iz nje izdvaja kostur slova. Izvučeni kostur se zatim skalira na uniformne dimenzije i gradi se vektor značajki korištenjem dijagonalne i horizontalne projekcije te broja točaka presjecište i broja krajnjih točaka. Tako dobiveni vektor značajki se dovodi na ulaze neuronske mreže koja je učena algoritmom propagacije pogreške unatrag uz dodatak momenta inercije. Skup za učenje neuronske mreže se sastojao od 4480 velikih i malih tiskanih slova hrvatske i engleske abecede.
+
+\kljucnerijeci{neuronske mreže, raspoznavanje rukom pisanih slova, obrada slike, binarizacija, dilatacija, stanjivanje, algoritam propagacije pogreške unatrag uz dodatak momenta inercije}
+\end{sazetak}
+
+% TODO: Navedite naslov na engleskom jeziku.
+\engtitle{Handwritten Letters Recognition}
+\begin{abstract}
+This thesis describes the algorithm and implementation details of system for handwritten letter recognition. On its input, it receives letter image, and returns recognized letter as output. First, the input image is preprocessed and letter skeleton is extracted. After that, letter skeleton is scaled to uniform dimension and feature vector is extracted using diagonal and horizontal projection and number of cross-points and end-points. Extracted feature vector is input for neural network which is trained using backpropagation algorithm with momentum. Training set is consisted of 4480 large and small handwritten letters of Croatian and English alphabet.
+
+\keywords{neural networks, handwritten letters recognition, image processing, binarization, dilation, thinning, backpropagation with momentum}
+\end{abstract}
+
+\end{document}

@@ -35,18 +35,25 @@ input[type="radio"] {
 }
 </style>
 <meta charset="UTF-8">
-<title>Survey</title>
+<title>adminPage</title>
 </head>
 <body>
-	<h1 align=center>MEMBER SATISFACTION SURVEY</h1>
+	<h1 align=center>MEMBER SATISFACTION SURVEY Results</h1>
 	<div id="div">
+	<h1>Select the User By his id to view his submitted report</h1>
+		<select class="target">
+			
+			
+		</select>
 		<form action="/survey" method="post">
 
 			<table class="table">
 
 
 			</table>
+			<!--  
 			<input type="submit" class="submit" value="Submit">
+			-->
 		</form>
 	</div>
 	<script
@@ -55,22 +62,63 @@ input[type="radio"] {
 		$(document)
 				.ready(
 						function() {
+							var firstUser;
+							$.get("/getAllUsers",function(data){
+								
+								for( k = 0; k < data.length ;k++ ){
+									if(k == 0){
+										firstUser = data[k].uId;
+										 $
+											.get(
+													"/adminIndividualResults/"+firstUser,
+													function(data) {
+														//data = jQuery.parseJSON(data);
+														// $( "div" ).append( JSON.stringfy(data));
+														for (j = 0; j < data.length; j++) {
+															var x = '	<tr class="border">	<td>'
+																	+ j + '.&nbsp<td>';
+															x += data[j].qDescription
+																	+ '</tr>	';
+															for (i = 0; i < data[j].answer.length; i++) {
 
-							$
+																x += '<tr><td><td><input type="'+data[j].aType+'" class="check" name="'+data[j].qId+'" value="'+data[j].answer[i].aId+ '" checked="checked" disabled>'
+																		+ data[j].answer[i].aDescription
+																		+ '</tr>		<tr><td>			<td>';
+															}
+															x += '	<tr><td colspan="2"><hr></tr>';
+
+															$("table").append(x);
+															//$("table").append(x);
+															//alert( );
+														}
+
+													});
+									}
+									 x  = "<option value='"+data[k].uId+"'>"+data[k].uId+"</option>";
+									 $("select").append(x);
+								}
+								
+							});
+							$( "select" ).change(function() {
+								 var str = null;
+								 $( "select option:selected" ).each(function() {
+									 firstUser = $( this ).text() + " ";
+								      $("table").text("");
+								    });
+								 $
 									.get(
-											"/getAll",
+											"/adminIndividualResults/"+firstUser,
 											function(data) {
 												//data = jQuery.parseJSON(data);
 												// $( "div" ).append( JSON.stringfy(data));
 												for (j = 0; j < data.length; j++) {
 													var x = '	<tr class="border">	<td>'
-															+j
-															+ '.&nbsp<td>';
+															+ j + '.&nbsp<td>';
 													x += data[j].qDescription
 															+ '</tr>	';
 													for (i = 0; i < data[j].answer.length; i++) {
-														
-														x += '<tr><td><td><input type="'+data[j].aType+'" class="check" name="'+data[j].qId+'" value="'+data[j].answer[i].aId+ '">'
+
+														x += '<tr><td><td><input type="'+data[j].aType+'" class="check" name="'+data[j].qId+'" value="'+data[j].answer[i].aId+ '" checked="checked" disabled>'
 																+ data[j].answer[i].aDescription
 																+ '</tr>		<tr><td>			<td>';
 													}
@@ -80,11 +128,12 @@ input[type="radio"] {
 													//$("table").append(x);
 													//alert( );
 												}
-												
 
 											});
+								
+							});
 						
-
+							
 						});
 	</script>
 </body>

@@ -1,5 +1,0 @@
-package org.timsina.main.config;
-
-public class JDBIConfig {
-
-}

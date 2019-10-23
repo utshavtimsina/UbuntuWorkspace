@@ -1,6 +1,0 @@
-package org.timsina.main.service;
-
-public interface DataBaseService {
-
-	public T getBookDto(<T> bookDto);
-}

@@ -1,0 +1,8 @@
+\select@language {croatian}
+\contentsline {chapter}{\numberline {1}Uvod}{1}
+\contentsline {chapter}{\numberline {2}Obrada slike}{2}
+\contentsline {chapter}{\numberline {3}Izlu\IeC {\v c}ivanje zna\IeC {\v c}ajki}{3}
+\contentsline {chapter}{\numberline {4}Klasifikacija}{4}
+\contentsline {section}{\numberline {4.1}Klasifikacija}{4}
+\contentsline {chapter}{\numberline {5}Zaklju\IeC {\v c}ak}{5}
+\contentsline {section}{\numberline {5.1}Zakljucak}{5}

@@ -1,0 +1,199 @@
+Kako je već navedeno, kao klasifikator korištena je višeslojna unaprijedna potpuno povezana neuronska mreža učena s algoritmom propagacije pogreške unatrag uz dodatak momenta inercije. Korištena je implementacija neuronske mreže iz biblioteke otvorenog koda \emph{Neuroph}\footnote{link: http://neuroph.sourceforge.net}. Prilikom učenja isprobano je više raznih parametara, od stope učenja, momenta inercije preko raznoraznih kombinacija broja neurona unutar skrivenih slojeva, pa i sam broj skrivenih slojeva. Najbolji rezultati su dobiveni za dva skrivena sloja po $86$ neurona u svakome od slojeva. Stopa učenja je bila $\eta = 0.01$, a moment inercije $\alpha = 0.025$.
+
+Kao vektor značajki isprobano je niz kombinacija poput pojedinačne vertikalne, horizontalne i dijagonalne projekcije, pa hibridne kombinacije već navedenih. No na kraju je najbolje rezultate dala hibridna kombinacija dijagonalne i horizontalne projekcije te broja točaka presjecišta i krajnjih točaka. Točnije, slike su bile dimenzija $30 \times 30$ točaka pa je vektor značajki pojedine slike imao ukupno 65 elemenata. Od toga, dijagonalnoj projekciji je pripalo 48 elemenata, horizontalnoj projekciji 15 jer se u obzir uzimao svaki šesti redak slike te još po broj točaka presjecišta i broj krajnjih točaka na način kako je objašnjeno u prijašnjem poglavlju.
+
+Kako se sustav koji se gradi kroz ovaj rad treba koristiti pri ispravljanju obrazaca s odgovorima za abc-pitalice krajnjem korisniku nije važna informacija je li ispitanik unio veliko ili malo slovo stoga je izlazni sloj neuronske mreže sadržavao 27 ili 32 izlaza, za pojedini razred slova, ovisno o tome je li se mreža učila na engleskoj ili hrvatskoj abecedi znakova. Abecedi znakova dodan je znak crtice '-' kao znak za poništavanje danog odgovora. Gledanje velikog i malog slova kao jedan razred ujedno je i olakšalo klasifikaciju neuronskoj mreži jer bez poznavanja konteksta mreža teško može razlikovati veliko i malo slovo o jer kad se skaliraju na istu dimenziju dobiju se dva ista slova.
+
+Mreža je učena na hrvatskoj i engleskoj abecedi te na velikim i malim slovima. Najbolji rezultati su dobiveni za velika slova engleske abecede, dok su najlošiji dobiveni za velika i mala slova hrvatske abecede. U sljedećim tablicama prikazani su rezultati učenja za velika slova engleske abecede, te sva slova hrvatske abecede. Također radi usporedbe je prikazan i rezultat učenja vektorom horizontalne projekcije koji ima 90 elemenata te je učenje njime bilo dosta duže nego hibridnim vektorom. Stupac \emph{Metoda 1} predstavlja uspješnost prepoznavanja slova korištenjem vektora horizontalne projekcije, a stupac \emph{Metoda 2} predstavlja uspješnost prepoznavanja slova korištenjem hibridnog vektora dijagonalne i horizontalne projekcije i strukturnih točaka kako je već navedeno.  Pri testiranju mreže korišteno je po pet malih i pet velikih slova.
+
+Što se tiče prikazanih rezultata za velika slova engleske abecede (tablica \ref{eng_abc}) i hibridnog vektora najviše je rasipanja rezultata na slovima Q, koje je mreža prepoznala kao O, no tu se nije moglo nešto previše napraviti jer u samom skupu podataka to slovo je ispisano s jako malom kvačicom na dnu, te na slovu N, koje je mreža prepoznala kao M, no to je također problem u samom skupu podataka. No u prikazanim podacima najviše odskače slovo H, kojeg mreža uz vektor horizontalne projekcije nije uspjela prepoznati niti jednom.
+
+Kod rezultata hrvatske abecede (tablica \ref{cro_abc}) za velika i mala slova najviše problema stvaraju mala slova. Na primjer, malo slovo l je u potpunosti krivo klasificirano kao veliko slovo I.
+Također, većina slova Č je klasificirana kao slovo Ć (slika \ref{fig:letter_ch}).
+ \begin{figure}[htb]
+    \centering
+    \includegraphics[width=4cm]{images/ch.png}
+    \caption{Slovo č prepoznato kao slovo ć}
+    \label{fig:letter_ch}
+\end{figure}
+Također su sva mala slova g prepoznata kao malo slovo q jer ih ljudi dosta slično pišu, što je i prikazano na slici \ref{fig:letter_g}.
+ \begin{figure}[htb]
+    \centering
+    \includegraphics[width=4cm]{images/g.png}
+    \caption{Malo slovo g prepoznato kao malo slovo q}
+    \label{fig:letter_g}
+\end{figure}
+Navedeni problemi su vidljivi i kod vektora horizontalne projekcije i hibridnog vektora. No i tu problem leži u samom skupu podataka jer većina ljudi malo slovo l piše kao veliko slovo I, i to bez ikakve razlike, što je i prikazano na slici \ref{fig:letter_l}.
+ \begin{figure}[htb]
+    \centering
+    \includegraphics[width=4cm]{images/letter_l.png}
+    \caption{Malo slovo l prepoznato kao veliko slovo I}
+    \label{fig:letter_l}
+\end{figure}
+Zanimljivo je primijetiti kako je većina slova č krivo klasificirana, dok su sva slova ć uredno prepoznata. I tu je problem kod skupa podataka jer većina ljudi slovo č piše s jednom polegnutom kvačicom, što bez konteksta teško da se može znati o kom je slovu riječ pa to mreža klasificira kao ć. Bitno je napomenuti da je u tablici \ref{cro_abc} izostavljen rezultat prepoznavanja znaka poništavanja odgovora, to jest crtice, zbog ljepšeg formatiranja tablice, no njegovo prepoznavanje je u potpunosti točno. Matrica zabune za pojedino slovo hrvatske abecede prikazana je tablicom \ref{confusion_matrix_cro}, dok za velika slova engleske abecede je prikazana tablicom \ref{confusion_matrix_eng}.
+
+\begin{table}[]
+\centering
+\caption{Broj prepoznatih velikih slova engleske abecede. Svako slovo je testirano s pet primjeraka.}
+\label{eng_abc}
+\begin{tabular}{c|c|c}
+Slovo & Metoda 1 & Metoda 2 \\ \hline
+A & 4/5 & 4/5 \\ \hline
+B & 5/5 & 5/5 \\ \hline
+C & 5/5 & 5/5 \\ \hline
+D & 5/5 & 4/5 \\ \hline
+E & 5/5 & 5/5 \\ \hline
+F & 5/5 & 5/5 \\ \hline
+G & 5/5 & 3/5 \\ \hline
+H & 0/5 & 4/5 \\ \hline
+I & 5/5 & 5/5 \\ \hline
+J & 5/5 & 5/5 \\ \hline
+K & 3/5 & 4/5 \\ \hline
+L & 5/5 & 5/5 \\ \hline
+M & 3/5 & 5/5 \\ \hline
+N & 4/5 & 3/5 \\ \hline
+O & 5/5 & 5/5 \\ \hline
+P & 5/5 & 5/5 \\ \hline
+R & 3/5 & 4/5 \\ \hline
+S & 5/5 & 5/5 \\ \hline
+T & 5/5 & 5/5 \\ \hline
+U & 2/5 & 4/5 \\ \hline
+V & 4/5 & 5/5 \\ \hline
+Z & 5/5 & 4/5 \\ \hline
+X & 4/5 & 4/5 \\ \hline
+Y & 5/5 & 5/5 \\ \hline
+W & 5/5 & 4/5 \\ \hline
+Q & 3/5 & 2/5 \\ \hline
+- & 5/5 & 5/5 \\ \hline
+Uku. & 85.71\% & 88.57\%
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\centering
+\caption{Broj prepoznatih velikih i malih slova hrvatske abecede. Svako slovo je testirano s deset primjeraka, to jest pet velikih i pet malih slova.}
+\label{cro_abc}
+\scalebox{0.95} {
+\begin{tabular}{c|c|c}
+\hline
+Slovo & Metoda 1 & Metoda 2 \\ \hline
+A & 6/10 & 7/10 \\ \hline
+B & 9/10 & 10/10 \\ \hline
+C & 10/10 & 9/10 \\ \hline
+D & 7/10 & 6/10 \\ \hline
+E & 9/10 & 9/10 \\ \hline
+F & 5/10 & 6/10 \\ \hline
+G & 7/10 & 4/10 \\ \hline
+H & 3/10 & 8/10 \\ \hline
+I & 8/10 & 9/10 \\ \hline
+J & 10/10 & 10/10 \\ \hline
+K & 6/10 & 8/10 \\ \hline
+L & 5/10 & 5/10 \\ \hline
+M & 8/10 & 9/10 \\ \hline
+N & 5/10 & 6/10 \\ \hline
+O & 10/10 & 9/10 \\ \hline
+P & 10/10 & 10/10 \\ \hline
+R & 9/10 & 8/10 \\ \hline
+S & 10/10 & 9/10 \\ \hline
+T & 10/10 & 10/10 \\ \hline
+U & 7/10 & 8/10 \\ \hline
+V & 9/10 & 10/10 \\ \hline
+Z & 9/10 & 8/10 \\ \hline
+X & 6/10 & 9/10 \\ \hline
+Y & 10/10 & 10/10 \\ \hline
+W & 9/10 & 9/10 \\ \hline
+Q & 3/10 & 3/10 \\ \hline
+Č & 2/10 & 2/10 \\ \hline
+Ć & 10/10 & 10/10 \\ \hline
+Đ & 9/10 & 10/10 \\ \hline
+Š & 8/10 & 5/10 \\ \hline
+Ž & 7/10 & 6/10 \\ \hline
+Uku. & 76.88\% & 78.44\% \\ \hline
+\end{tabular}
+}
+\end{table}
+
+
+\begin{table}[]
+\setlength{\tabcolsep}{2pt}
+\centering
+\caption{Matrica zabune za hrvatsku abecedu. Element tablice predstavlja broj koliko je puta slovo iz retka prepoznato kao slovo iz stupca. Svako slovo je testirano s deset primjeraka.}
+\label{confusion_matrix_cro}
+\scalebox{0.9} {
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
+\cline{2-33}
+  & A & B  & C & D & E & F & G & H & I & J  & K & L & M & N & O & P  & R & S & T  & U & V  & Z & X & Y  & W & Q & Č & Ć  & Đ  & Š & Ž & -  \\ \hline
+A & 7 & 0  & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 1  & 0 & 0 & 0 & 0  & 1  & 0 & 0 & 0  \\ \hline
+B & 0 & 10 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+C & 0 & 0  & 9 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 1 & 0 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+D & 0 & 1  & 0 & 6 & 0 & 0 & 0 & 0 & 0 & 0  & 1 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0  & 1 & 0  & 0 & 1 & 0  & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+E & 0 & 0  & 0 & 0 & 9 & 0 & 0 & 0 & 0 & 0  & 0 & 1 & 0 & 0 & 0 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+F & 0 & 0  & 0 & 0 & 0 & 6 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 2  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 2  & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+G & 1 & 0  & 0 & 0 & 0 & 0 & 4 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 1  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 0 & 4 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+H & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 8 & 0 & 0  & 0 & 0 & 0 & 2 & 0 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+I & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 9 & 0  & 0 & 1 & 0 & 0 & 0 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+J & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 10 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+K & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0  & 8 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 0 & 0 & 0 & 0  & 0  & 1 & 0 & 0  \\ \hline
+L & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 5 & 0  & 0 & 5 & 0 & 0 & 0 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+M & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0  & 0 & 0 & 9 & 0 & 0 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+N & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 1 & 6 & 0 & 0  & 1 & 0 & 0  & 1 & 0  & 0 & 1 & 0  & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+O & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 9 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 1 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+P & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 10 & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+R & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 2 & 0 & 0 & 0 & 0  & 8 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+S & 0 & 0  & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 9 & 0  & 0 & 0  & 0 & 0 & 0  & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+T & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 10 & 0 & 0  & 0 & 0 & 0  & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+U & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0  & 8 & 2  & 0 & 0 & 0  & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+V & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0  & 0 & 10 & 0 & 0 & 0  & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+Z & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0  & 1 & 0 & 0  & 0 & 0  & 8 & 0 & 0  & 0 & 0 & 0 & 0  & 0  & 0 & 1 & 0  \\ \hline
+X & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 1 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 9 & 0  & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+Y & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 10 & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+W & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1  & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 9 & 0 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+Q & 0 & 0  & 0 & 0 & 0 & 0 & 4 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 3 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 0 & 3 & 0 & 0  & 0  & 0 & 0 & 0  \\ \hline
+Č & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 0 & 0 & 2 & 8  & 0  & 0 & 0 & 0  \\ \hline
+Ć & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 0 & 0 & 0 & 10 & 0  & 0 & 0 & 0  \\ \hline
+Đ & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 0 & 0 & 0 & 0  & 10 & 0 & 0 & 0  \\ \hline
+Š & 0 & 0  & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 1  & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 1  & 0 & 0 & 0 & 2  & 0  & 5 & 0 & 0  \\ \hline
+Ž & 0 & 0  & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 1 & 0 & 1 & 0  & 0  & 1 & 6 & 0  \\ \hline
+- & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0 & 0 & 0 & 0  & 0 & 0 & 0  & 0 & 0  & 0 & 0 & 0  & 0 & 0 & 0 & 0  & 0  & 0 & 0 & 10 \\ \hline
+\end{tabular}
+}
+\end{table}
+
+
+\begin{table}[]
+\setlength{\tabcolsep}{2pt}
+\centering
+\caption{Matrica zabune za velika slova engleske abecede. Element tablice predstavlja broj koliko je puta slovo iz retka prepoznato kao slovo iz stupca. Svako slovo je testirano s pet primjeraka.}
+\label{confusion_matrix_eng}
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
+\cline{2-28}
+  & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O & P & R & S & T & U & V & Z & X & Y & W & Q & - \\ \hline
+A & 4 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\ \hline
+B & 0 & 5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+C & 0 & 0 & 5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+D & 0 & 1 & 0 & 4 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+E & 0 & 0 & 0 & 0 & 5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+F & 0 & 0 & 0 & 0 & 0 & 5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+G & 0 & 0 & 0 & 0 & 0 & 0 & 3 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\ \hline
+H & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 4 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\ \hline
+I & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+J & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+K & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 4 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+L & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+M & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+N & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 3 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+O & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+P & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+R & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 4 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+S & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+T & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 5 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+U & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 4 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+V & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 5 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+Z & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 4 & 0 & 0 & 0 & 0 & 0 \\ \hline
+X & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 4 & 0 & 0 & 0 & 0 \\ \hline
+Y & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 5 & 0 & 0 & 0 \\ \hline
+W & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 4 & 0 & 0 \\ \hline
+Q & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 3 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 2 & 0 \\ \hline
+- & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 5 \\ \hline
+\end{tabular}
+\end{table}

@@ -5,6 +5,7 @@ import org.famas.main.service.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,5 +57,17 @@ public class FormController {
 				///*
 		
 	}
-	
+	@GetMapping("/admin")
+	public String generateSurveyAnalysis() {
+		return "index";
+	}
+	@GetMapping("/adminIndividualResults/{id}")
+	@ResponseBody public Object generateIndividualSurveyAnalysis(@PathVariable int id ) {
+		
+		return formService.getResultsByUserId(id);
+	}
+	@GetMapping("/getAllUsers")
+	@ResponseBody public Object getAllUsers() {
+		return formService.getAllUsers();
+	}
 }

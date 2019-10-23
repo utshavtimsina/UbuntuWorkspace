@@ -25,7 +25,7 @@ public class FormService {
 	public List<Question> getDefinedSql() {
 		List<Question> questions =repo.getQuestionAnswer();
 		for(Question question : questions) {
-			List<Answer> answers = repo.getAnswerById(question.getqId());
+			List<Answer> answers = repo.getAnswerByQid(question.getqId());
 			question.setAnswer(answers);
 		}
 		return questions;
@@ -59,6 +59,31 @@ public class FormService {
 		//surveyAnswerRepo.save(surveyAnswer);
 
 		//return survey.get();
+	}
+
+	public List<Question> getResultsByUserId(int id) {
+		// TODO Auto-generated method stub
+		Surveys survey = repo.findByuId(id);
+		List<SurveyAnswer> answers = repo.getResultsByUserId(survey.getsId());
+			List<Question> questions =  repo.getQuestionAnswer();
+			for(Question question : questions) {
+				for(SurveyAnswer answer : answers ) {
+					
+					if(question.getqId() == answer.getqId()) {
+						question.getAnswer().add((Answer)repo.getAnswerById(answer.getaId()));	
+						if(question.getaType().equals("radio")) {
+							continue;
+						}
+					}
+				}
+			}
+			return questions;
+			
+		
+	}
+
+	public Object getAllUsers() {
+		return repo.getAllUsers();
 	}
 	
 }

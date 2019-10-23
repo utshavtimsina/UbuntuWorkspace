@@ -22,6 +22,16 @@ public class Answer implements Serializable{
 	private int aId;
 	private String aName;
 	private String aDescription;
+	private int question_q_id;
+	
+public Answer(int aId, String aName, String aDescription, int question_q_id) {
+		super();
+		this.aId = aId;
+		this.aName = aName;
+		this.aDescription = aDescription;
+		this.question_q_id = question_q_id;
+	}
+
 //	private Question question;
 
 	public Answer() {
@@ -29,13 +39,7 @@ public class Answer implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Answer(int aId, String aName, String aDescription) {
-		super();
-		this.aId = aId;
-		this.aName = aName;
-		this.aDescription = aDescription;
-		
-	}
+	
 
 	public int getaId() {
 		return aId;
@@ -59,6 +63,14 @@ public class Answer implements Serializable{
 
 	public void setaDescription(String aDescription) {
 		this.aDescription = aDescription;
+	}
+
+	public int getQuestion_q_id() {
+		return question_q_id;
+	}
+
+	public void setQuestion_q_id(int question_q_id) {
+		this.question_q_id = question_q_id;
 	}
 
 	

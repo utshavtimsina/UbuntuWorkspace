@@ -1,7 +1,0 @@
-package org.timsina.main.service.impl;
-
-import org.timsina.main.service.BookService;
-
-public class BookServiceImpl implements BookService {
-
-}
