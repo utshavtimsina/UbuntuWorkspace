@@ -40,11 +40,17 @@ input[type="radio"] {
 <body>
 	<h1 align=center>MEMBER SATISFACTION SURVEY Results</h1>
 	<div id="div">
-	<h1>Select the User By his id to view his submitted report</h1>
-		<select class="target">
+	<table>
+	<tr>
+	<th><h4>Report Submitted by User ID:</h4></th>
+		
+	<th><select class="target">
 			
 			
-		</select>
+		</select></th><th>OR</th><th><a href="#" class="overall"> view Overall report</a></th></tr>
+		<br>
+	</table>
+	
 		<form action="/survey" method="post">
 
 			<table class="table">
@@ -68,43 +74,15 @@ input[type="radio"] {
 								for( k = 0; k < data.length ;k++ ){
 									if(k == 0){
 										firstUser = data[k].uId;
-										 $
-											.get(
-													"/adminIndividualResults/"+firstUser,
-													function(data) {
-														//data = jQuery.parseJSON(data);
-														// $( "div" ).append( JSON.stringfy(data));
-														for (j = 0; j < data.length; j++) {
-															var x = '	<tr class="border">	<td>'
-																	+ j + '.&nbsp<td>';
-															x += data[j].qDescription
-																	+ '</tr>	';
-															for (i = 0; i < data[j].answer.length; i++) {
+										drawer(firstUser);
 
-																x += '<tr><td><td><input type="'+data[j].aType+'" class="check" name="'+data[j].qId+'" value="'+data[j].answer[i].aId+ '" checked="checked" disabled>'
-																		+ data[j].answer[i].aDescription
-																		+ '</tr>		<tr><td>			<td>';
-															}
-															x += '	<tr><td colspan="2"><hr></tr>';
-
-															$("table").append(x);
-															//$("table").append(x);
-															//alert( );
-														}
-
-													});
 									}
 									 x  = "<option value='"+data[k].uId+"'>"+data[k].uId+"</option>";
 									 $("select").append(x);
 								}
 								
 							});
-							$( "select" ).change(function() {
-								 var str = null;
-								 $( "select option:selected" ).each(function() {
-									 firstUser = $( this ).text() + " ";
-								      $("table").text("");
-								    });
+							function drawer(firstUser){
 								 $
 									.get(
 											"/adminIndividualResults/"+firstUser,
@@ -124,14 +102,45 @@ input[type="radio"] {
 													}
 													x += '	<tr><td colspan="2"><hr></tr>';
 
-													$("table").append(x);
+													$(".table").append(x);
 													//$("table").append(x);
 													//alert( );
 												}
 
-											});
-								
+											});}
+							$( "select" ).change(function() {
+								 var str = null;
+								 $( "select option:selected" ).each(function() {
+									 firstUser = $( this ).text() + " ";
+								      $(".table").text("");
+								    });
+								drawer(firstUser);
+							
 							});
+							$(".overall").click(function(){
+							 $(".table").text("");
+							 $.get("/overall",function(data){
+									for (j = 0; j < data.length; j++) {
+										var x = '	<tr class="border">	<td>'
+												+ j + '.&nbsp<td>';
+										x += data[j].qDescription
+												+ '</tr>	';
+										for (i = 0; i < data[j].answer.length; i++) {
+
+											x += '<tr><td><td><input type="'+data[j].aType+'" class="check" name="'+data[j].qId+'" value="'+data[j].answer[i].aId+ '" checked="checked" disabled>'
+													+ data[j].answer[i].aDescription
+													+ '</tr>		<tr><td>			<td>';
+										}
+										x += '	<tr><td colspan="2"><hr></tr>';
+
+										$(".table").append(x);
+										//$("table").append(x);
+										//alert( );
+									}
+							 });
+							 
+							});
+							
 						
 							
 						});

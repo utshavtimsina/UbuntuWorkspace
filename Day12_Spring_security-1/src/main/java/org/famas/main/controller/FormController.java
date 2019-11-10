@@ -1,8 +1,14 @@
 package org.famas.main.controller;
 
 import org.famas.main.model.Question;
+import org.famas.main.security.CustomUserDetails;
 import org.famas.main.service.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +24,8 @@ import org.famas.main.util.Formatter;
 public class FormController {
 	@Autowired
 	FormService formService;
-
-	@GetMapping("")
+	BCryptPasswordEncoder passwordEncoder;
+	@GetMapping("/")
 	public String surveyPage() {
 		return "Surveys";
 	}
@@ -27,6 +33,7 @@ public class FormController {
 	@GetMapping("/getAll")
 	@ResponseBody
 	public Object getMyResult() {
+	
 		return formService.getDefinedSql();
 	}
 
@@ -42,6 +49,12 @@ public class FormController {
 	@ResponseBody
 	public Object saveUserSurveyAnswer(@RequestBody String surveyAnswers) {
 		// return surveyAnswers;
+		/*
+		 * SecurityContext authentication = SecurityContextHolder.getContext();
+		 * CustomUserDetails currentPrincipalName = (CustomUserDetails)
+		 * authentication.getAuthentication().getPrincipal(); return
+		 * currentPrincipalName;
+		 */
 		return format.formatter(surveyAnswers);
 		// return surveyService.saveUserSurveyAnswer(surveyAnswers);
 
@@ -69,5 +82,10 @@ public class FormController {
 	@GetMapping("/getAllUsers")
 	@ResponseBody public Object getAllUsers() {
 		return formService.getAllUsers();
+	}
+	
+	@GetMapping("/overall")
+	@ResponseBody public Object generateOverallResult() {
+		return formService.generateOverallResult();
 	}
 }

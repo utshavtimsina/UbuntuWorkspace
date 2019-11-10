@@ -7,11 +7,16 @@ import org.famas.main.model.Answer;
 import org.famas.main.model.Question;
 import org.famas.main.model.SurveyAnswer;
 import org.famas.main.model.Surveys;
+import org.famas.main.security.CustomUserDetails;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
+import org.jdbi.v3.sqlobject.config.RegisterColumnMapper;
+import org.jdbi.v3.sqlobject.config.RegisterRowMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
+
+
 
 public interface FormRepo {
 	@SqlQuery("SELECT * FROM question q")
@@ -51,4 +56,14 @@ public interface FormRepo {
 	@RegisterBeanMapper(Surveys.class)
 	public List<Surveys> getAllUsers();
 	
+	@SqlQuery("SELECT MAX(a.count),a.a_id FROM (SELECT a_id, COUNT(a_id) count FROM survey_answer WHERE q_id =:id GROUP BY a_id ORDER BY count DESC) a")
+	@RegisterColumnMapper(ModeMapper.class)
+	public Object getModeAnswerByQid(int id);
+
+	@SqlQuery("SELECT *,r.id as rid FROM user u INNER JOIN role r ON r.id = u.role_id WHERE username = :username")
+	@RegisterRowMapper(value = CustomUserMapper.class)
+	public CustomUserDetails loadUserByUsername(@Bind("username") String username);
+	
+	@SqlUpdate("INSERT INTO surveys VALUES(:id,:id)")
+	public void createNewUserSurvey(int id);
 }
