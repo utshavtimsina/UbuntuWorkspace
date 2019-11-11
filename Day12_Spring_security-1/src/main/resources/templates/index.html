@@ -77,8 +77,14 @@ input[type="radio"] {
 										drawer(firstUser);
 
 									}
-									 x  = "<option value='"+data[k].uId+"'>"+data[k].uId+"</option>";
-									 $("select").append(x);
+									Uid = data[k].uId;
+									
+									$.get("/getUserById/"+data[k].uId,function(dataa){
+										//alert(dataa.id);
+										 x  = "<option value='"+dataa.id+"'>"+dataa.username+"</option>";
+										 $("select").append(x);
+									});
+									
 								}
 								
 							});
@@ -109,9 +115,11 @@ input[type="radio"] {
 
 											});}
 							$( "select" ).change(function() {
+								
 								 var str = null;
 								 $( "select option:selected" ).each(function() {
-									 firstUser = $( this ).text() + " ";
+									 firstUser = $( this ).val();
+									
 								      $(".table").text("");
 								    });
 								drawer(firstUser);

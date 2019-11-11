@@ -7,6 +7,7 @@ import org.famas.main.model.Answer;
 import org.famas.main.model.Question;
 import org.famas.main.model.SurveyAnswer;
 import org.famas.main.model.Surveys;
+import org.famas.main.model.UserDto;
 import org.famas.main.security.CustomUserDetails;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import org.jdbi.v3.sqlobject.config.RegisterColumnMapper;
@@ -66,4 +67,8 @@ public interface FormRepo {
 	
 	@SqlUpdate("INSERT INTO surveys VALUES(:id,:id)")
 	public void createNewUserSurvey(int id);
+	
+	@SqlQuery("SELECT * FROM user WHERE id =:id")
+	@RegisterBeanMapper(UserDto.class)
+	public UserDto getUserById(int id);
 }

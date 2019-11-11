@@ -39,7 +39,7 @@ CustomAuthenticationProvider authenticationProvider;
 			.httpBasic()
 			.and()
 			.authorizeRequests()
-			.antMatchers("/questionSavePage","/saveQuestionAnswers","/admin","/adminIndividualResults/*").hasAuthority("ROLE_ADMIN")
+			.antMatchers("/questionSavePage","/getUserById","/saveQuestionAnswers","/admin","/adminIndividualResults/*").hasAuthority("ROLE_ADMIN")
 			.antMatchers("/survey").hasAuthority("ROLE_USER")
 			.antMatchers("/getAll").permitAll()
 			.antMatchers("/*").permitAll()

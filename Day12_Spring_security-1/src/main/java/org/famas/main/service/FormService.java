@@ -7,6 +7,7 @@ import org.famas.main.model.Answer;
 import org.famas.main.model.Question;
 import org.famas.main.model.SurveyAnswer;
 import org.famas.main.model.Surveys;
+import org.famas.main.model.UserDto;
 import org.famas.main.repo.FormRepo;
 import org.famas.main.security.CustomUserDetails;
 import org.jdbi.v3.core.Jdbi;
@@ -102,6 +103,11 @@ public class FormService {
 			question.getAnswer().add(repo.getAnswerById((int) repo.getModeAnswerByQid(question.getqId())));
 		}
 		return questions;
+	}
+
+	public UserDto getUserById(int id) {
+		// TODO Auto-generated method stub
+		return repo.getUserById(id);
 	}
 	
 }

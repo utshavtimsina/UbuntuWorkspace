@@ -1,6 +1,7 @@
 package org.famas.main.controller;
 
 import org.famas.main.model.Question;
+import org.famas.main.model.UserDto;
 import org.famas.main.security.CustomUserDetails;
 import org.famas.main.service.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +70,10 @@ public class FormController {
 				//return format.questionAnswerFormatter(questionAnswers);
 				///*
 		
+	}
+	@GetMapping("/getUserById/{id}")
+	@ResponseBody public Object getUserById(@PathVariable int id) {
+		return formService.getUserById(id);
 	}
 	@GetMapping("/admin")
 	public String generateSurveyAnalysis() {
