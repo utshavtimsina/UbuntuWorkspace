@@ -45,6 +45,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="/media/utshav/NEW VOLUME/workspace-spring-tool-suite-4-4.4.0.RELEASE/UbuntuWorkspace/Day12"/>
 			<item value="/home/utshav/Documents/EclipseWorkspace/final-thesis-master"/>
 			<item value="/home/utshav/Documents/EclipseWorkspace/springboot-jdbi-integration"/>
 			<item value="/home/utshav/Downloads/EclipseWorkspace"/>

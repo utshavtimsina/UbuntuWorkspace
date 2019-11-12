@@ -40,7 +40,7 @@ input[type="radio"] {
 <body>
 	<h1 align=center>MEMBER SATISFACTION SURVEY</h1>
 	<div id="div">
-		<form action="/survey" method="post">
+		<form action="/survey" method="post" >
 
 			<table class="table">
 
@@ -64,19 +64,44 @@ input[type="radio"] {
 												// $( "div" ).append( JSON.stringfy(data));
 												for (j = 0; j < data.length; j++) {
 													var x = '	<tr class="border">	<td>'
-															+j
+															+(j+1)
 															+ '.&nbsp<td>';
 													x += data[j].qDescription
 															+ '</tr>	';
+													if(data[j].aType != "multiple"){
+													
 													for (i = 0; i < data[j].answer.length; i++) {
 														
-														x += '<tr><td><td><input type="'+data[j].aType+'" class="check" name="'+data[j].qId+'" value="'+data[j].answer[i].aId+ '">'
-																+ data[j].answer[i].aDescription
+														x += '<tr><td><td><input type="'+data[j].aType+'" class="check" name="'+data[j].qId+'" value="'+data[j].answer[i].aid+ '">'
+																+ data[j].answer[i].adescription
 																+ '</tr>		<tr><td>			<td>';
 													}
 													x += '	<tr><td colspan="2"><hr></tr>';
-
-													$("table").append(x);
+													}else{
+														x +='<tr><td></td><td><table >';
+														var ans;
+														for (i = 0; i < data[j].subQuestion.length; i++) {
+																if(i == 0){
+																	x +='<tr><td><td>';
+																	//alert(data[j].subQuestion[i].answer[0].adescription);
+																	ans = data[j].subQuestion[i].answer.length;
+																	for(k =0 ;k < ans; k++){
+																		
+																		x +='<td> '+data[j].subQuestion[i].answer[k].adescription+'</td>';
+																	}
+																	x +='</tr>';
+																}
+																	//alert(data[j].subQuestion[i].answer[i].adescription);
+																x +='<tr><td>'+ data[j].subQuestion[i].qdescription+'</td><td></td>';
+																for(k =0 ;k < ans; k++){
+																	
+																	x +='<td><input type=checkbox name ='+data[j].qId+' value='+data[j].subQuestion[i].id+'C'+data[j].subQuestion[0].answer[k].aid+'></td>';
+																}
+																x +='</tr>';
+														}
+														x +='</table></td></tr>';
+													}
+													$(".table").append(x);
 													//$("table").append(x);
 													//alert( );
 												}

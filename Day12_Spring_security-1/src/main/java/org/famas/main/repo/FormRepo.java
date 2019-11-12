@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.famas.main.model.Answer;
 import org.famas.main.model.Question;
+import org.famas.main.model.SubQuestion;
 import org.famas.main.model.SurveyAnswer;
 import org.famas.main.model.Surveys;
 import org.famas.main.model.UserDto;
@@ -46,10 +47,10 @@ public interface FormRepo {
 	@RegisterBeanMapper(Surveys.class)
 	public Surveys findByuId(@Bind int id);
 	
-	@SqlUpdate("INSERT INTO survey_answer(a_id,q_id,remarks,survey_s_id) VALUES (:aId,:qId,:remarks,:id)")
-	public void saveUserSurveyAnswer(@BindBean SurveyAnswer s,@Bind int id);
+	@SqlUpdate("INSERT INTO survey_answer(survey_s_id,a_id,q_id,remarks,sub_question_id) VALUES (:ids,:aId,:qId,:remarks,:subQuestionId)")
+	public void saveUserSurveyAnswer(@BindBean SurveyAnswer ans,@Bind int ids);
 	
-	@SqlQuery("SELECT * FROM survey_answer WHERE survey_s_id = :sId")
+	@SqlQuery("SELECT * FROM survey_answer WHERE survey_s_id = :sId ")
 	@RegisterBeanMapper(SurveyAnswer.class)
 	public List<SurveyAnswer> getResultsByUserId(@Bind int sId);
 	
@@ -70,5 +71,17 @@ public interface FormRepo {
 	
 	@SqlQuery("SELECT * FROM user WHERE id =:id")
 	@RegisterBeanMapper(UserDto.class)
-	public UserDto getUserById(int id);
+	public UserDto getUserById(@Bind int id);
+	
+	@SqlQuery("SELECT * FROM sub_question WHERE qId = :getqId")
+	@RegisterBeanMapper(SubQuestion.class)
+	public List<SubQuestion> getSubQuestionByQid(@Bind int getqId);
+
+	@SqlQuery("SELECT * FROM answer WHERE  sub_question_id = :SubQid AND question_q_id = :qId ")
+	@RegisterBeanMapper(Answer.class)
+	public List<Answer> getSubAnswerBySubQuestionId(int SubQid, int qId);
+	
+	@SqlQuery("SELECT * FROM answer WHERE  sub_question_id= :subAnswer AND a_id = :aId ")
+	@RegisterBeanMapper(Answer.class)
+	public List<Answer> getSubAnswerBySubAnswerId(int subAnswer, int aId);
 }

@@ -49,7 +49,7 @@ public class FormController {
 	@PostMapping("/survey")
 	@ResponseBody
 	public Object saveUserSurveyAnswer(@RequestBody String surveyAnswers) {
-		// return surveyAnswers;
+		//return surveyAnswers;
 		/*
 		 * SecurityContext authentication = SecurityContextHolder.getContext();
 		 * CustomUserDetails currentPrincipalName = (CustomUserDetails)
@@ -63,10 +63,10 @@ public class FormController {
 	
 	@PostMapping("/saveQuestionAnswers")
 	@ResponseBody public Object saveQuestionAnswers(@RequestBody String questionAnswers) { 
-		Question question=(Question) format.questionAnswerFormatter(questionAnswers);
-		return formService.saveQuestionAnswers(question);
+		//Question question=(Question) format.questionAnswerFormatter(questionAnswers);
+		//return formService.saveQuestionAnswers(question);
 		//return question.getqDescription();
-		//return questionAnswers;
+		return questionAnswers;
 				//return format.questionAnswerFormatter(questionAnswers);
 				///*
 		
