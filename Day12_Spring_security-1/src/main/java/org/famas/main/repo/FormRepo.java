@@ -40,8 +40,8 @@ public interface FormRepo {
 	@SqlUpdate("INSERT INTO question(q_id,q_description,q_name,q_remarks,a_type) VALUES (:qId,:qDescription,:qName,:qRemarks,:aType)")
 	public void saveQuestion(@BindBean Question question);
 	
-	@SqlUpdate("INSERT INTO answer(a_description,a_name,question_q_id) VALUES(:aDescription,:aName,:qId)")
-	public void saveAnswer(@BindBean Answer answer,@Bind int qId);
+	@SqlUpdate("INSERT INTO answer(a_description,a_name,question_q_id,sub_question_id) VALUES(:aDescription,:aName,:question_q_id,:subQuestionId)")
+	public void saveAnswer(@BindBean Answer answer);
 	
 	@SqlQuery("SELECT * FROM surveys WHERE u_id = :id")
 	@RegisterBeanMapper(Surveys.class)
@@ -84,4 +84,11 @@ public interface FormRepo {
 	@SqlQuery("SELECT * FROM answer WHERE  sub_question_id= :subAnswer AND a_id = :aId ")
 	@RegisterBeanMapper(Answer.class)
 	public List<Answer> getSubAnswerBySubAnswerId(int subAnswer, int aId);
+	
+	@SqlUpdate("INSERT INTO sub_question(qid,q_description) VALUES(:qId,:qDescription)")
+	public void saveSubQuestion(@BindBean SubQuestion subQ);
+	
+	@SqlQuery("SELECT MAX(id) FROM sub_question")
+	@RegisterBeanMapper(Integer.class)
+	public int getMaxSubQId();
 }

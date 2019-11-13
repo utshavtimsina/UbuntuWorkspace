@@ -20,9 +20,9 @@
 <title>Adding Data</title>
 </head>
 <body>
-	<script type="text/javascript" src="../src/form2js.js"></script>
-	<script type="text/javascript">
-var SendData;
+<script type="text/javascript" src="../src/form2js.js"></script>
+<script type="text/javascript" src="../src/json2.js"></script>
+<script type="text/javascript">
 	function test()
 	{
 		var formData = form2js('testForm', '.', true,
@@ -33,44 +33,32 @@ var SendData;
 						return { name: node.id, value: node.innerHTML };
 					}
 				});
-		 SendData = JSON.stringify(formData);
-		 $.ajax({
-				type : "POST",
-				url : "/saveQuestionAnswers",
-				data : SendData,
-				dataType : "json",
-				contentType : 'application/json',					
-				success:function(data){
-						alert(JSON.stringify(data));
-						location.reload();
-				}
+		$.ajax({
+			  method: "POST",
+			  url: "/saveQuestionAnswers",
+			  data: {"data":formData},
+			  //dataType: "application/json",
+			  accept: "Application/JSON",
+			  success:function(data){
+				  //alert(data);
+					$("body").html(data); 
+			  }
+			  
 			});
+		
+		//document.body.innerHTML = JSON.stringify(formData, null, '\t');
 	}
-
-		
-		
-		
-		/* $(document).on("click",function(){
-			$.ajax({
-				type : "POST",
-				url : "/user",
-				data : datas,
-				dataType : "json",
-				contentType : 'application/json'					
-			});	 */
-		
-	
 </script>
 	<h2>
 		<a href="/admin">Content Management</a>
 	</h2>
 	<div id="parent" align="center">
-		<form id="testForm" action="javascript:test()">
+		<form id="testForm" action="javascript:test()" >
 			<label>Question:</label><br>
 			<textarea rows="3" cols="50" name="question" autofocus></textarea>
 			<br> <label>Answer Type:</label> <br> <br> <input
-				type="radio" name="radio" value="radio" checked="checked" class="radiobtn"> <label>radio</label>
-			<input type="radio" name="radio" value="checkbox" class="radiobtn"> <label>checkbox</label>
+				type="radio" name="radio" value="radio" checked="checked"> <label>radio</label>
+			<input type="radio" name="radio" value="checkbox"> <label>checkbox</label>
 			<input type="radio" name="radio" id="multiple" value="multiple">
 			<label>Multiple</label>
 			<div class="data"></div>
@@ -90,7 +78,7 @@ var SendData;
 							$("#add")
 									.click(
 											function() {
-												var textArea = '<textarea rows="2" cols="40" name="answers[]" class="answers" autofocus></textarea><br>';
+												var textArea = '<textarea rows="2" cols="40" name="answer[]" id="area" autofocus></textarea><br>';
 												$("#answer").append(textArea);
 												//alert("clicked"); 
 											});
@@ -134,7 +122,9 @@ var SendData;
 												var tableData = '<td><input type="text" name="answers[]"><button type="button" class="remove"><i class="far fa-trash-alt"></i></button></td>';
 												$(".header").append(tableData);
 
-												$(document).off('click');
+												$(element).off('click').on('click', function() {
+															// function body
+														});
 											});
 
 							$("#addquestions")
@@ -143,42 +133,25 @@ var SendData;
 												var tableRow = '<tr><td><input type="text" id="questions" name="questions[]"><button type="button" class="remove"><i class="far fa-trash-alt"></i></button></td>'
 
 												$("#addData").append(tableRow);
-												$(document).off('click');
+												$(element).off('click').on(
+														'click', function() {
+															// function body
+														});
 											});
 
 							$(".remove").click(function() {
 
 								$(this).parent().remove();
-								$(document).off('click');
-							});
-							
-							$(".radiobtn").click(function() {
-								$(".data").css({
-									'display' : 'none'
+								$(element).off('click').on('click', function() {
+									// function body
 								});
 
-								$("#add").css({
-
-									'display' : 'block'
-								});
-
-								$("#multiple").click(function() {
-
-									$(".data").css({
-										
-										'display' : 'block'
-									});
-									$(document).off('click');
-									
-								})
-
-								$(document).off('click');
 							});
 
 						});
 	</script>
-
-
+	
+	
 </body>
 
 

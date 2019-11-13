@@ -4,20 +4,27 @@
 <style>
 body {
 	position: relative;
-	background-image: url(login.jpg); //
+	//background-image: url(login.jpg); //
 	background-repeat: repeat-y; //
 	background-repeat: repeat-y;
+	font-size : 20px;
+	
+}
+th{
+	width:50px;
+	border: 1px;
 }
 
 table {
 	position: relative;
+	background-color:white;
 }
 
 #div {
 	margin: auto;
-	background-color: #C0C0C0;
-	height: 50%;
-	width: 40%;
+	background-color: white;
+	 height: 50%;
+	max-width: 60%;
 }
 
 hr {
@@ -33,6 +40,22 @@ input[type="radio"] {
 	width: 17px;
 	height: 17px;
 }
+
+input[type="checkbox"] {
+	vertical-align: bottom;
+	width: 17px;
+	height: 17px;
+}
+td{
+	padding:5px;
+}
+/* table tr:nth-child(odd){ 
+		background: #b8d1f3;
+		}
+		
+		table tr:nth-child(even){ 
+		background: blue;
+		} */
 </style>
 <meta charset="UTF-8">
 <title>Survey</title>
@@ -72,13 +95,13 @@ input[type="radio"] {
 													
 													for (i = 0; i < data[j].answer.length; i++) {
 														
-														x += '<tr><td><td><input type="'+data[j].aType+'" class="check" name="'+data[j].qId+'" value="'+data[j].answer[i].aid+ '">'
-																+ data[j].answer[i].adescription
+														x += '<tr><td><td><input type="'+data[j].aType+'" class="check" name="'+data[j].qId+'" value="'+data[j].answer[i].aId+ '">'
+																+ data[j].answer[i].aDescription
 																+ '</tr>		<tr><td>			<td>';
 													}
 													x += '	<tr><td colspan="2"><hr></tr>';
 													}else{
-														x +='<tr><td></td><td><table >';
+														x +='<tr><td></td><td><table border=1 frame=void rules=rows >';
 														var ans;
 														for (i = 0; i < data[j].subQuestion.length; i++) {
 																if(i == 0){
@@ -87,19 +110,22 @@ input[type="radio"] {
 																	ans = data[j].subQuestion[i].answer.length;
 																	for(k =0 ;k < ans; k++){
 																		
-																		x +='<td> '+data[j].subQuestion[i].answer[k].adescription+'</td>';
+																		x +='<th style="background-color:#aee8e3"> '+data[j].subQuestion[i].answer[k].aDescription+'</th>';
 																	}
 																	x +='</tr>';
 																}
 																	//alert(data[j].subQuestion[i].answer[i].adescription);
-																x +='<tr><td>'+ data[j].subQuestion[i].qdescription+'</td><td></td>';
+																x +='<tr><td>'+ data[j].subQuestion[i].qDescription+'</td><td></td>';
 																for(k =0 ;k < ans; k++){
 																	
-																	x +='<td><input type=checkbox name ='+data[j].qId+' value='+data[j].subQuestion[i].id+'C'+data[j].subQuestion[0].answer[k].aid+'></td>';
+																	x +='<td><input type=checkbox name ='+data[j].qId+' value='+data[j].subQuestion[i].id+'C'+data[j].subQuestion[0].answer[k].aId+'></td>';
 																}
+																//x += '<tr><hr></tr>';
 																x +='</tr>';
+																
 														}
 														x +='</table></td></tr>';
+														x += '<tr><td colspan="2"><hr></tr>';
 													}
 													$(".table").append(x);
 													//$("table").append(x);

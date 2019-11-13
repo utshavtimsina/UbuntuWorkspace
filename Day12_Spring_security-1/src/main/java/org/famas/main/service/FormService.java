@@ -50,10 +50,27 @@ public class FormService {
 		repo.saveQuestion(questionAnswer);
 
 		// answerRepo.save(questionAnswer.getAnswer());
-		for (Answer answer : questionAnswer.getAnswer()) {
-			repo.saveAnswer(answer, q_id);
-			// answerRepo.save(answer);
+		if(questionAnswer.getaType().equals("multiple")) {
+			for(SubQuestion subQ : questionAnswer.getSubQuestion()) {
+				subQ.setqId(q_id);
+				repo.saveSubQuestion(subQ);
+				int sub_q_id = repo.getMaxSubQId();
+				for (Answer answer : subQ.getAnswer()) {
+					answer.setQuestion_q_id(q_id);
+					answer.setSubQuestionId(sub_q_id);
+					repo.saveAnswer(answer);
+					// answerRepo.save(answer);
+				}
+			}
+		}else {
+			for (Answer answer : questionAnswer.getAnswer()) {
+				answer.setQuestion_q_id(q_id);
+				answer.setSubQuestionId(0);
+				repo.saveAnswer(answer);
+				// answerRepo.save(answer);
+			}
 		}
+		
 		// return null;
 		return "Save Success! !!";
 	}
@@ -88,7 +105,7 @@ public class FormService {
 				List<SubQuestion> subquestion = repo.getSubQuestionByQid(question.getqId());
 				for (SubQuestion q : subquestion) {
 					for (SurveyAnswer surveyResult : surveyAnswers) {
-						if (surveyResult.getSubQuestionId() == q.getId() && surveyResult.getqId() == q.getQId()) {
+						if (surveyResult.getSubQuestionId() == q.getId() && surveyResult.getqId() == q.getqId()) {
 							q.getAnswer().add(repo.getAnswerById(surveyResult.getaId()));
 						}
 					}

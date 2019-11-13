@@ -67,52 +67,6 @@ public class Formatter {
 
 	}
 
-	public Object questionAnswerFormatter(String questionAnswers) {
-		Question question = new Question();
-		try {
-			questionAnswers = URLDecoder.decode(questionAnswers, StandardCharsets.UTF_8.toString());
-		} catch (UnsupportedEncodingException ex) {
-			throw new RuntimeException(ex.getCause());
-		}
-
-//	/*	
-
-		if (questionAnswers.contains("&")) {
-
-			String[] data = questionAnswers.split("&");
-			for (int i = 0; i < data.length; i++) {
-
-				// String[] Final = Values[0].split("c");
-
-				if (data[i].contains("question")) {
-					String[] Values = data[i].split("=");
-
-					question.setqDescription(Values[1]);
-				}
-
-				if (data[i].contains("radio")) {
-					String[] Values = data[i].split("=");
-					question.setaType(Values[1]);
-				}
-
-				if (data[i].contains("answer")) {
-					String[] Values = data[i].split("=");
-					Answer answer = new Answer();
-					answer.setADescription(Values[1]);
-					question.getAnswer().add(answer);
-				}
-				/// answerService.saveUserSurveyAnswer(answerGiven);
-				// return Values;
-
-			}
-			return question;
-		}
-		String[] Values = questionAnswers.split("=");
-		question.setqDescription(Values[1]);
-		return question;
-
-	}
-
 	//
 
 }
