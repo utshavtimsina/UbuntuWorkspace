@@ -1,9 +1,9 @@
 package org.famas.main.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.famas.main.model.Answer;
+import org.famas.main.model.Comments;
 import org.famas.main.model.Question;
 import org.famas.main.model.SubQuestion;
 import org.famas.main.model.SurveyAnswer;
@@ -75,7 +75,7 @@ public class FormService {
 		return "Save Success! !!";
 	}
 
-	public Object saveUserSurveyAnswer(SurveyAnswer surveyAnswer) {
+	public void saveUserSurveyAnswer(SurveyAnswer surveyAnswer) {
 		SecurityContext authentication = SecurityContextHolder.getContext();
 		CustomUserDetails currentPrincipalName = (CustomUserDetails) authentication.getAuthentication().getPrincipal();
 		Surveys survey = repo.findByuId(currentPrincipalName.getUser().getId());
@@ -84,36 +84,49 @@ public class FormService {
 		}
 		surveyAnswer.setSurvey(survey);
 		repo.saveUserSurveyAnswer(surveyAnswer, currentPrincipalName.getUser().getId());
-		// return "Save Success!!!!";
-		// repo.saveSurveyAnswer() //return surveyAnswer;
-		// survey.get().getSurveysAnswer().add(surveyAnswer);
-		// surveyAnswer.setSurvey(survey.get());
-
-		// surveyAnswerRepo.save(surveyAnswer);
-
-		return surveyAnswer;
 	}
 
 	public Object getResultsByUserId(int id) {
 		// TODO Auto-generated method stub
 		Surveys survey = repo.findByuId(id);
 		List<SurveyAnswer> surveyAnswers = repo.getResultsByUserId(survey.getsId());
+		Comments comment;
 		///*
 		List<Question> questions = repo.getQuestionAnswer();
+		
 		for (Question question : questions) {
 			if (question.getaType().equals("multiple")) {
 				List<SubQuestion> subquestion = repo.getSubQuestionByQid(question.getqId());
+				Comments comments =null;
 				for (SubQuestion q : subquestion) {
 					for (SurveyAnswer surveyResult : surveyAnswers) {
 						if (surveyResult.getSubQuestionId() == q.getId() && surveyResult.getqId() == q.getqId()) {
 							q.getAnswer().add(repo.getAnswerById(surveyResult.getaId()));
+							if(comments == null && surveyResult.getCommentId() > 0 ) {
+								comments = new Comments();
+								comments.setComment(repo.getCommentById(surveyResult.getCommentId()));
+								question.setComment(comments);
+							}
 						}
 					}
 				}
+				/*
+				 * comment = new Comments(); if (surveyResult.getCommentId() != 0) {
+				 * 
+				 * comment.setComment(repo.getCommentById(surveyResult.getCommentId()));
+				 * question.setComment(comment); }
+				 */
 				question.setSubQuestion(subquestion);
 			}else {
 				for (SurveyAnswer surveyResult : surveyAnswers) {
 					if (surveyResult.getqId() == question.getqId()) {
+						 comment = new Comments();
+						  if(surveyResult.getCommentId() != 0) { 
+							 
+							  comment.setComment(repo.getCommentById(surveyResult.getCommentId()));
+							  question.setComment(comment);
+						  }
+						 						
 						question.getAnswer().add(repo.getAnswerById(surveyResult.getaId()));
 					}
 				}
@@ -143,6 +156,14 @@ public class FormService {
 	public UserDto getUserById(int id) {
 		// TODO Auto-generated method stub
 		return repo.getUserById(id);
+	}
+
+	public void saveUserSurveyAnswer(SurveyAnswer answerGiven, Comments comment) {
+		// TODO Auto-generated method stub
+		repo.saveUserComments(comment.getComment());
+		SecurityContext authentication = SecurityContextHolder.getContext();
+		CustomUserDetails currentPrincipalName = (CustomUserDetails) authentication.getAuthentication().getPrincipal();
+		repo.updateCommentIntoDB(repo.getMaxCommentId(),currentPrincipalName.getUser().getId(),answerGiven.getqId());
 	}
 
 }

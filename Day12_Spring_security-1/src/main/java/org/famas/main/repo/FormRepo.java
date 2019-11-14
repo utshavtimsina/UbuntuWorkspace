@@ -83,7 +83,7 @@ public interface FormRepo {
 	
 	@SqlQuery("SELECT * FROM answer WHERE  sub_question_id= :subAnswer AND a_id = :aId ")
 	@RegisterBeanMapper(Answer.class)
-	public List<Answer> getSubAnswerBySubAnswerId(int subAnswer, int aId);
+	public List<Answer> getSubAnswerBySubAnswerId(@Bind int subAnswer, @Bind int aId);
 	
 	@SqlUpdate("INSERT INTO sub_question(qid,q_description) VALUES(:qId,:qDescription)")
 	public void saveSubQuestion(@BindBean SubQuestion subQ);
@@ -91,4 +91,19 @@ public interface FormRepo {
 	@SqlQuery("SELECT MAX(id) FROM sub_question")
 	@RegisterBeanMapper(Integer.class)
 	public int getMaxSubQId();
+	
+	@SqlUpdate("INSERT INTO comments(comment) VALUES(:comment)")
+	public void saveUserComments(String comment);
+	
+	@SqlQuery("SELECT MAX(id) FROM comments")
+	public int getMaxCommentId();
+	
+	@SqlUpdate("INSERT INTO survey_answer(survey_s_id,a_id,q_id,remarks,sub_question_id,comment_id) VALUES (:ids,:aId,:qId,:remarks,:subQuestionId,:maxCommentId)")
+	public void saveUserSurveyAnswer(SurveyAnswer surveyAnswer, int maxCommentId, int id);
+	
+	@SqlQuery("SELECT comment FROM comments WHERE id = :commentId ")
+	public String getCommentById(int commentId);
+	
+	@SqlUpdate("UPDATE survey_answer SET comment_id = :maxCommentId WHERE survey_s_id = :sId AND q_id = :qId ")
+	public void updateCommentIntoDB(@Bind int maxCommentId,@Bind int sId,@Bind int qId);
 }

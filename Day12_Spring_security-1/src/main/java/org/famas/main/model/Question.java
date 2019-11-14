@@ -19,6 +19,7 @@ public class Question implements Serializable{
 		private String qDescription;
 		private String qRemarks;
 		private String aType;
+		private Comments comment;
 		private List<SubQuestion> subQuestion =new ArrayList<>(); 
 		private List<Answer> answer =new ArrayList<>();
 		
@@ -27,7 +28,7 @@ public class Question implements Serializable{
 			// TODO Auto-generated constructor stub
 		}
 
-		public Question(int qId, String qName, String qDescription, String qRemarks, String aType,
+		public Question(int qId, String qName, String qDescription, String qRemarks, String aType, Comments comment,
 				List<SubQuestion> subQuestion, List<Answer> answer) {
 			super();
 			this.qId = qId;
@@ -35,6 +36,7 @@ public class Question implements Serializable{
 			this.qDescription = qDescription;
 			this.qRemarks = qRemarks;
 			this.aType = aType;
+			this.comment = comment;
 			this.subQuestion = subQuestion;
 			this.answer = answer;
 		}
@@ -77,6 +79,14 @@ public class Question implements Serializable{
 
 		public void setaType(String aType) {
 			this.aType = aType;
+		}
+
+		public Comments getComment() {
+			return comment;
+		}
+
+		public void setComment(Comments comment) {
+			this.comment = comment;
 		}
 
 		public List<SubQuestion> getSubQuestion() {

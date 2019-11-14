@@ -19,18 +19,20 @@ public class SurveyAnswer implements Serializable{
 	private int qId;
 	private String remarks;
 	private int subQuestionId;
+	private int commentId;
 	private Surveys survey;
 	public SurveyAnswer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public SurveyAnswer(int id, int aId, int qId, String remarks, int subQuestionId, Surveys survey) {
+	public SurveyAnswer(int id, int aId, int qId, String remarks, int subQuestionId, int commentId, Surveys survey) {
 		super();
 		this.id = id;
 		this.aId = aId;
 		this.qId = qId;
 		this.remarks = remarks;
 		this.subQuestionId = subQuestionId;
+		this.commentId = commentId;
 		this.survey = survey;
 	}
 	public int getId() {
@@ -63,6 +65,12 @@ public class SurveyAnswer implements Serializable{
 	public void setSubQuestionId(int subQuestionId) {
 		this.subQuestionId = subQuestionId;
 	}
+	public int getCommentId() {
+		return commentId;
+	}
+	public void setCommentId(int commentId) {
+		this.commentId = commentId;
+	}
 	public Surveys getSurvey() {
 		return survey;
 	}
@@ -70,7 +78,5 @@ public class SurveyAnswer implements Serializable{
 		this.survey = survey;
 	}
 	
-
 	
-
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.timsina.main.service.SurveyAnswerService"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
     <fullyQualifiedTypeName name="org.timsina.main.model.SurveyAnswer"/>
     <fullyQualifiedTypeName name="java.util.Optional"/>
@@ -47,17 +46,18 @@
     <fullyQualifiedTypeName name="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="org.famas.main.security.CustomUserDetails"/>
-    <fullyQualifiedTypeName name="org.jdbi.v3.sqlobject.statement.SqlUpdate"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ResponseBody"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="org.famas.main.model.UserDto"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
-    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
-    <fullyQualifiedTypeName name="lombok.Data"/>
-    <fullyQualifiedTypeName name="org.famas.main.model.SubQuestion"/>
-    <fullyQualifiedTypeName name="org.famas.main.model.Answer"/>
-    <fullyQualifiedTypeName name="org.jdbi.v3.sqlobject.statement.SqlQuery"/>
     <fullyQualifiedTypeName name="org.jdbi.v3.sqlobject.config.RegisterBeanMapper"/>
     <fullyQualifiedTypeName name="org.jdbi.v3.sqlobject.customizer.BindBean"/>
+    <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
+    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
+    <fullyQualifiedTypeName name="org.famas.main.model.Question"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="org.famas.main.model.Answer"/>
+    <fullyQualifiedTypeName name="org.famas.main.model.SubQuestion"/>
+    <fullyQualifiedTypeName name="org.jdbi.v3.sqlobject.statement.SqlUpdate"/>
+    <fullyQualifiedTypeName name="org.jdbi.v3.sqlobject.statement.SqlQuery"/>
 </qualifiedTypeNameHistroy>
