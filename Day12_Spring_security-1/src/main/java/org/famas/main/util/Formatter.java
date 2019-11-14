@@ -1,5 +1,9 @@
 package org.famas.main.util;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+
 import org.famas.main.model.Comments;
 import org.famas.main.model.SurveyAnswer;
 import org.famas.main.service.FormService;
@@ -26,7 +30,11 @@ public class Formatter {
 						continue;
 					}else {
 						comment = new Comments();
-						comment.setComment(Values[1]);
+						try {
+							comment.setComment(URLDecoder.decode(Values[1], StandardCharsets.UTF_8.toString()));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
 						String[] commentIds = Values[0].split("C");
 						answerGiven.setqId(Integer.parseInt(commentIds[1]));
 						answerService.saveUserSurveyAnswer(answerGiven,comment);

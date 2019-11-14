@@ -34,7 +34,6 @@ public class FormService {
 				for (SubQuestion subquestion : repo.getSubQuestionByQid(question.getqId())) {
 					subquestion.setAnswer(repo.getSubAnswerBySubQuestionId(subquestion.getId(), question.getqId()));
 					question.getSubQuestion().add(subquestion);
-					// question.getSubQuestion().getClass().
 				}
 			} else {
 				question.setAnswer(repo.getAnswerByQid(question.getqId()));
@@ -44,7 +43,6 @@ public class FormService {
 	}
 
 	public Object saveQuestionAnswers(Question questionAnswer) {
-		// questionRepo.save(questionAnswer);
 		int q_id = repo.getMaxQuestionId() + 1;
 		questionAnswer.setqId(q_id);
 		repo.saveQuestion(questionAnswer);
@@ -78,16 +76,10 @@ public class FormService {
 	public void saveUserSurveyAnswer(SurveyAnswer surveyAnswer) {
 		SecurityContext authentication = SecurityContextHolder.getContext();
 		CustomUserDetails currentPrincipalName = (CustomUserDetails) authentication.getAuthentication().getPrincipal();
-		Surveys survey = repo.findByuId(currentPrincipalName.getUser().getId());
-		if (survey == null) {
-			repo.createNewUserSurvey(currentPrincipalName.getUser().getId());
-		}
-		surveyAnswer.setSurvey(survey);
 		repo.saveUserSurveyAnswer(surveyAnswer, currentPrincipalName.getUser().getId());
 	}
 
 	public Object getResultsByUserId(int id) {
-		// TODO Auto-generated method stub
 		Surveys survey = repo.findByuId(id);
 		List<SurveyAnswer> surveyAnswers = repo.getResultsByUserId(survey.getsId());
 		Comments comment;
@@ -110,12 +102,6 @@ public class FormService {
 						}
 					}
 				}
-				/*
-				 * comment = new Comments(); if (surveyResult.getCommentId() != 0) {
-				 * 
-				 * comment.setComment(repo.getCommentById(surveyResult.getCommentId()));
-				 * question.setComment(comment); }
-				 */
 				question.setSubQuestion(subquestion);
 			}else {
 				for (SurveyAnswer surveyResult : surveyAnswers) {
@@ -144,8 +130,6 @@ public class FormService {
 	}
 
 	public Object generateOverallResult() {
-		// TODO Auto-generated method stub
-
 		List<Question> questions = repo.getQuestionAnswer();
 		for (Question question : questions) {
 			question.getAnswer().add(repo.getAnswerById((int) repo.getModeAnswerByQid(question.getqId())));
@@ -154,16 +138,25 @@ public class FormService {
 	}
 
 	public UserDto getUserById(int id) {
-		// TODO Auto-generated method stub
 		return repo.getUserById(id);
 	}
 
 	public void saveUserSurveyAnswer(SurveyAnswer answerGiven, Comments comment) {
-		// TODO Auto-generated method stub
 		repo.saveUserComments(comment.getComment());
 		SecurityContext authentication = SecurityContextHolder.getContext();
 		CustomUserDetails currentPrincipalName = (CustomUserDetails) authentication.getAuthentication().getPrincipal();
 		repo.updateCommentIntoDB(repo.getMaxCommentId(),currentPrincipalName.getUser().getId(),answerGiven.getqId());
+	}
+
+	public boolean hasUserAlreadySubmittedForm(int id) {
+		if(repo.findByuId(id) != null) {
+			return true;
+		}
+		return false;
+	}
+
+	public void createNewUserSurvey(int uId) {
+		repo.createNewUserSurvey(uId);
 	}
 
 }

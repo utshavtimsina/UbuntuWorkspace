@@ -6,9 +6,13 @@ import org.famas.main.mapper.QuestionAnswerSaveMapper;
 import org.famas.main.model.Answer;
 import org.famas.main.model.Question;
 import org.famas.main.model.SubQuestion;
+import org.famas.main.security.CustomUserDetails;
 import org.famas.main.service.FormService;
 import org.famas.main.util.Formatter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,14 +53,12 @@ public class FormController {
 	@ResponseBody
 	public Object saveUserSurveyAnswer(@RequestBody String surveyAnswers) {
 		//return surveyAnswers;
-		/*
-		 * SecurityContext authentication = SecurityContextHolder.getContext();
-		 * CustomUserDetails currentPrincipalName = (CustomUserDetails)
-		 * authentication.getAuthentication().getPrincipal(); return
-		 * currentPrincipalName;
-		 */
-		return format.formatter(surveyAnswers);
-		// return surveyService.saveUserSurveyAnswer(surveyAnswers);
+		CustomUserDetails authen = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(!formService.hasUserAlreadySubmittedForm(authen.getUser().getId()) ) {
+			formService.createNewUserSurvey(authen.getUser().getId());
+			return format.formatter(surveyAnswers);
+		}
+		return "Form already submitted!!!";
 
 	}
 
@@ -118,8 +120,10 @@ public class FormController {
 	@GetMapping("/adminIndividualResults/{id}")
 	@ResponseBody
 	public Object generateIndividualSurveyAnalysis(@PathVariable int id) {
-
-		return formService.getResultsByUserId(id);
+		if(formService.hasUserAlreadySubmittedForm(id)) {
+			return formService.getResultsByUserId(id);
+		}
+		return "User has not submitted anything!!!!!";
 	}
 
 	@GetMapping("/getAllUsers")
