@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 13, 2019 at 11:11 AM
+-- Generation Time: Nov 15, 2019 at 10:40 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -49,8 +49,8 @@ INSERT INTO `answer` (`a_id`, `a_description`, `a_name`, `question_q_id`, `sub_q
 (87, 'Agree', NULL, 84, 2),
 (88, 'Somewhat agree', NULL, 84, 3),
 (89, 'Somewhat agree', NULL, 84, 2),
-(90, 'Neither\r\nagree nor\r\ndisagree', NULL, 84, 2),
-(91, 'Somewhat\r\ndisagree', NULL, 84, 2),
+(90, 'Neither agree nor disagree', NULL, 84, 2),
+(91, 'Somewhat disagree', NULL, 84, 2),
 (92, 'Disagree', NULL, 84, 2),
 (93, 'Nepal', NULL, 87, 0),
 (94, 'India', NULL, 87, 0),
@@ -114,7 +114,33 @@ INSERT INTO `answer` (`a_id`, `a_description`, `a_name`, `question_q_id`, `sub_q
 (159, 'well', NULL, 92, 14),
 (160, 'good', NULL, 92, 15),
 (161, 'bad', NULL, 92, 15),
-(162, 'well', NULL, 92, 15);
+(162, 'well', NULL, 92, 15),
+(163, 'bhut bhut', NULL, 93, 0),
+(164, 'pyaa', NULL, 93, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
+  `comment` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `comment`) VALUES
+(19, 'good'),
+(20, 'Yo ..'),
+(21, 'Yes I do Agree!!'),
+(22, 'CardiB  '),
+(23, 'PutaMadre!!'),
+(24, ' I am Satisfed '),
+(25, 'Yes i do baaa.........................\r\n...............\r\n...................///>>>>>>>>>>>>>>>...............');
 
 -- --------------------------------------------------------
 
@@ -159,7 +185,8 @@ INSERT INTO `question` (`q_id`, `q_description`, `q_name`, `q_remarks`, `a_type`
 (84, 'Considering our club’s culture, members, and meetings, indicate your agreement with the\r\nfollowing statements.', NULL, NULL, 'multiple'),
 (87, 'Where do Kalapani belongs?', NULL, NULL, 'radio'),
 (91, 'How would you rate the following aspects of our weekly meetings?', NULL, NULL, 'multiple'),
-(92, 'How do you feel about the survey??', NULL, NULL, 'multiple');
+(92, 'How do you feel about the survey??', NULL, NULL, 'multiple'),
+(93, 'How does an ignition motor starts??', NULL, NULL, 'radio');
 
 -- --------------------------------------------------------
 
@@ -227,10 +254,7 @@ CREATE TABLE `surveys` (
 --
 
 INSERT INTO `surveys` (`s_id`, `u_id`) VALUES
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5);
+(46, 46);
 
 -- --------------------------------------------------------
 
@@ -244,44 +268,31 @@ CREATE TABLE `survey_answer` (
   `q_id` int(11) NOT NULL,
   `remarks` varchar(255) DEFAULT NULL,
   `survey_s_id` int(11) DEFAULT NULL,
-  `sub_question_id` int(11) NOT NULL DEFAULT 0
+  `sub_question_id` int(11) NOT NULL DEFAULT 0,
+  `comment_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `survey_answer`
 --
 
-INSERT INTO `survey_answer` (`id`, `a_id`, `q_id`, `remarks`, `survey_s_id`, `sub_question_id`) VALUES
-(172, 1, 1, NULL, 2, 0),
-(173, 87, 84, NULL, 2, 2),
-(186, 1, 1, NULL, 4, 0),
-(187, 87, 84, NULL, 4, 2),
-(188, 87, 84, NULL, 4, 3),
-(189, 87, 84, NULL, 4, 2),
-(190, 89, 84, NULL, 4, 2),
-(191, 87, 84, NULL, 3, 2),
-(192, 89, 84, NULL, 3, 2),
-(193, 6, 1, NULL, 4, 0),
-(194, 95, 87, NULL, 4, 0),
-(195, 97, 88, NULL, 4, 0),
-(196, 5, 1, NULL, 4, 0),
-(197, 101, 89, NULL, 4, 0),
-(198, 94, 87, NULL, 4, 0),
-(199, 102, 91, NULL, 2, 4),
-(200, 103, 91, NULL, 2, 4),
-(201, 103, 91, NULL, 2, 5),
-(202, 102, 91, NULL, 2, 6),
-(203, 103, 91, NULL, 2, 7),
-(204, 104, 91, NULL, 2, 7),
-(205, 102, 91, NULL, 2, 8),
-(206, 103, 91, NULL, 2, 9),
-(207, 104, 91, NULL, 2, 9),
-(208, 103, 91, NULL, 2, 10),
-(209, 103, 91, NULL, 2, 11),
-(210, 104, 91, NULL, 2, 12),
-(211, 4, 1, NULL, 2, 0),
-(212, 87, 84, NULL, 2, 2),
-(213, 95, 87, NULL, 2, 0);
+INSERT INTO `survey_answer` (`id`, `a_id`, `q_id`, `remarks`, `survey_s_id`, `sub_question_id`, `comment_id`) VALUES
+(286, 1, 1, NULL, 46, 0, NULL),
+(287, 87, 84, NULL, 46, 2, NULL),
+(288, 87, 84, NULL, 46, 3, NULL),
+(289, 93, 87, NULL, 46, 3, NULL),
+(290, 102, 91, NULL, 46, 4, NULL),
+(291, 102, 91, NULL, 46, 5, NULL),
+(292, 102, 91, NULL, 46, 6, NULL),
+(293, 102, 91, NULL, 46, 7, NULL),
+(294, 102, 91, NULL, 46, 8, NULL),
+(295, 102, 91, NULL, 46, 9, NULL),
+(296, 102, 91, NULL, 46, 10, NULL),
+(297, 102, 91, NULL, 46, 11, NULL),
+(298, 102, 91, NULL, 46, 12, NULL),
+(299, 157, 92, NULL, 46, 14, NULL),
+(300, 157, 92, NULL, 46, 15, NULL),
+(301, 163, 93, NULL, 46, 15, NULL);
 
 -- --------------------------------------------------------
 
@@ -302,11 +313,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `firstname`, `role_id`) VALUES
-(1, 'admin', 'admin', 'admin', 1),
-(2, 'user', 'user', 'user', 2),
-(3, 'utshavtimsina', 'utshav', 'UtshavTimsina', 2),
-(4, 'ashish', 'ashish', 'ashish', 2),
-(5, 'bijay', 'bijay', 'bijayku', 2);
+(46, 'user', 'user', 'userWithoneEye', 2);
 
 --
 -- Indexes for dumped tables
@@ -318,6 +325,12 @@ INSERT INTO `user` (`id`, `username`, `password`, `firstname`, `role_id`) VALUES
 ALTER TABLE `answer`
   ADD PRIMARY KEY (`a_id`),
   ADD KEY `answer_ibfk_1` (`question_q_id`);
+
+--
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `question`
@@ -365,13 +378,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `answer`
 --
 ALTER TABLE `answer`
-  MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+  MODIFY `a_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
+
+--
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `q_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `q_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -389,13 +408,13 @@ ALTER TABLE `sub_question`
 -- AUTO_INCREMENT for table `survey_answer`
 --
 ALTER TABLE `survey_answer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=302;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- Constraints for dumped tables
@@ -417,7 +436,7 @@ ALTER TABLE `sub_question`
 -- Constraints for table `survey_answer`
 --
 ALTER TABLE `survey_answer`
-  ADD CONSTRAINT `FKgptswrbkpkm48y94mpwwye530` FOREIGN KEY (`survey_s_id`) REFERENCES `surveys` (`s_id`);
+  ADD CONSTRAINT `FKgptswrbkpkm48y94mpwwye530` FOREIGN KEY (`survey_s_id`) REFERENCES `surveys` (`s_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
