@@ -9,5 +9,5 @@ public class Day12SpringSecurity1Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Day12SpringSecurity1Application.class, args);
 	}
-
+	
 }

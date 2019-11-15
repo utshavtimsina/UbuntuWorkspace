@@ -159,4 +159,9 @@ public class FormService {
 		repo.createNewUserSurvey(uId);
 	}
 
+	public void saveNewUser(UserDto st) {
+		// TODO Auto-generated method stub
+		repo.saveNewUser(st);
+	}
+
 }

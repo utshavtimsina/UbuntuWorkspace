@@ -8,8 +8,10 @@ body {
 	
 }
 th{
-	width:50px;
-	border: 1px;
+	width:90px;
+	
+	border: 2px solid white;
+	text-align:center; 
 }
 
 table {
@@ -43,6 +45,7 @@ input[type="checkbox"] {
 	vertical-align: bottom;
 	width: 17px;
 	height: 17px;
+
 }
 /* table tr:nth-child(odd){ 
 		background: #b8d1f3;
@@ -56,7 +59,7 @@ input[type="checkbox"] {
 <title>Survey</title>
 </head>
 <body>
-	<h1 align=center>MEMBER SATISFACTION SURVEY</h1>
+	<h1 align=center>WELCOME <span id=Fname></span>TO MEMBER SATISFACTION SURVEY</h1>
 	<div id="div">
 		<form action="/survey" method="post" >
 
@@ -73,7 +76,12 @@ input[type="checkbox"] {
 		$(document)
 				.ready(
 						function() {
-
+								
+							$.get("/getAuthenticatedFname",function(data){
+								//alert(data);
+								$("#Fname").text(data+ ", " );
+							});
+		
 							$
 									.get(
 											"/getAll",
@@ -100,12 +108,12 @@ input[type="checkbox"] {
 														var ans;
 														for (i = 0; i < data[j].subQuestion.length; i++) {
 																if(i == 0){
-																	x +='<tr><td><td>';
+																	x +='<tr><th colspan=2 style="background-color:#85d8ed; width:40%" >';
 																	//alert(data[j].subQuestion[i].answer[0].adescription);
 																	ans = data[j].subQuestion[i].answer.length;
 																	for(k =0 ;k < ans; k++){
 																		
-																		x +='<th style="background-color:#aee8e3"> '+data[j].subQuestion[i].answer[k].aDescription+'</th>';
+																		x +='<th style="background-color:#85d8ed"> '+data[j].subQuestion[i].answer[k].aDescription+'</th>';
 																	}
 																	x +='</tr>';
 																}
@@ -123,7 +131,7 @@ input[type="checkbox"] {
 														
 														x += '<tr><td colspan="2"><hr></tr>';
 														
-													}x+='<tr><td><td align="right"><h3 align="left"><span style="vertical-align:top">Comments and suggestions: </span><textarea  name="commentC'+data[j].qId+'" cols="50" rows="3" style="border-top:none;border-right:none;border-left:none; " placeholder="Type your comments here"></textarea></h3></tr>';
+													}x+='<tr><td><td align="right"><h3 align="left"><span style="vertical-align:top">Comments and suggestions: </span><textarea maxlength="255" name="commentC'+data[j].qId+'" cols="50" rows="3" style="border-top:none;border-right:none;border-left:none; " placeholder="Type your comments here"></textarea></h3></tr>';
 													$(".table").append(x);
 													//$("table").append(x);
 													//alert( );

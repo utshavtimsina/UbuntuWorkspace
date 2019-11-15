@@ -6,10 +6,12 @@ import org.famas.main.mapper.QuestionAnswerSaveMapper;
 import org.famas.main.model.Answer;
 import org.famas.main.model.Question;
 import org.famas.main.model.SubQuestion;
+import org.famas.main.model.UserDto;
 import org.famas.main.security.CustomUserDetails;
 import org.famas.main.service.FormService;
 import org.famas.main.util.Formatter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping
 @Controller
 public class FormController {
+
 	@Autowired
 	FormService formService;
 	BCryptPasswordEncoder passwordEncoder;
@@ -40,12 +43,34 @@ public class FormController {
 
 		return formService.getDefinedSql();
 	}
-
+	
+	@GetMapping("/getAuthenticatedFname")
+	@ResponseBody
+	public String getAuthenticatedUserName() {
+		CustomUserDetails authenticationToken = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return authenticationToken.getUser().getFirstName();
+	}
+	
 	@GetMapping("/questionSavePage")
 	public String questionAnswersSavePage() {
 		return "addData";
 	}
-
+	@GetMapping("/login")
+	public String loginPage() {
+		return "login";
+	}
+	
+	@GetMapping("/register")
+	public String registerNewUserPage() {
+		return "register";
+	}
+	@PostMapping("/registerNewUser")
+	@ResponseBody
+	public void registerNewUserWithDetails(@RequestBody UserDto st) {
+		formService.saveNewUser(st);
+		//return "hp";
+	}
+	
 	@Autowired
 	Formatter format;
 
@@ -57,8 +82,10 @@ public class FormController {
 		if(!formService.hasUserAlreadySubmittedForm(authen.getUser().getId()) ) {
 			formService.createNewUserSurvey(authen.getUser().getId());
 			return format.formatter(surveyAnswers);
+		}else {
+			return "Form already submitted!!!";
 		}
-		return "Form already submitted!!!";
+		
 
 	}
 

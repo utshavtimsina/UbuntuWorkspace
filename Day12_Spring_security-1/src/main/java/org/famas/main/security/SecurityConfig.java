@@ -13,13 +13,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-
+@Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 @Autowired
 CustomAuthenticationProvider authenticationProvider;
-
+@Autowired
+CustomAuthenticationSuccessHandler successHandler;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -34,18 +36,25 @@ CustomAuthenticationProvider authenticationProvider;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		
 		// TODO Auto-generated method stub
 		http.csrf().disable()
-			.httpBasic()
-			.and()
+			.httpBasic().disable()
 			.authorizeRequests()
 			.antMatchers("/questionSavePage","/getUserById","/saveQuestionAnswers","/admin","/adminIndividualResults/*").hasAuthority("ROLE_ADMIN")
-			.antMatchers("/survey").hasAuthority("ROLE_USER")
-			.antMatchers("/getAll").permitAll()
-			.antMatchers("/*").permitAll()
-			//.antMatchers("/ram").hasAuthority("ROLE_USER")
+			.antMatchers("/survey","/").hasAuthority("ROLE_USER")
+			//.antMatchers("/getAll").permitAll()
+			.antMatchers("/**").permitAll()
+			//.antMatchers("/resources/static/**").permitAll()
+			.antMatchers("/login","/register").permitAll()
 			.anyRequest()
-			.authenticated();
+			.authenticated()
+			.and()
+			.formLogin().successHandler(successHandler)
+			.loginPage("/login")
+			.loginProcessingUrl("/authenticate")
+			.and().logout().permitAll();
+			
 	}
 
 	@Bean

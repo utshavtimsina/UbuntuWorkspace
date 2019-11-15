@@ -106,4 +106,7 @@ public interface FormRepo {
 	
 	@SqlUpdate("UPDATE survey_answer SET comment_id = :maxCommentId WHERE survey_s_id = :sId AND q_id = :qId ")
 	public void updateCommentIntoDB(@Bind int maxCommentId,@Bind int sId,@Bind int qId);
+	
+	@SqlUpdate("INSERT INTO user (username,password,firstname,role_id) VALUES(:username,:password,:firstName,2)")
+	public void saveNewUser(@BindBean UserDto st);
 }
