@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.nio.channels.Channel;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -57,28 +58,31 @@ public class RecognizeTab extends JPanel {
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
 
-        JButton loadNetworkButton = new JButton("Load network");
+        /*JButton loadNetworkButton = new JButton("Load network");
         loadNetworkButton.addActionListener(e -> {
             JFileChooser fc = new JFileChooser();
             fc.setDialogTitle("Open neural net file");
             if (fc.showOpenDialog(this) != JFileChooser.APPROVE_OPTION) {
                 return;
             }
-            Path path = fc.getSelectedFile().toPath();
+        //    Path path = fc.getSelectedFile().toPath();
+           
+            System.out.println("/home/utshav/NeuralNet_English.nnet");
             if (!Files.isReadable(path)) {
                 return;
             }
             try {
-                nnet = NeuralNetwork.createFromFile(path.toString());
+               
                 console.addLog("Loaded neural net:");
                 console.addLog(path.getFileName().toString());
             } catch (Exception exception) {
                 console.addLog("Unable to load neural net:");
                 console.addLog(path.getFileName().toString());
             }
-        });
-        buttonsPanel.add(loadNetworkButton);
-
+        });*/
+      //  buttonsPanel.add(loadNetworkButton);
+        Path paths =Paths.get("/home/utshav/NeuralNet_English.nnet");
+        nnet = NeuralNetwork.createFromFile(paths.toString());
         JButton loadImageButton = new JButton("Load letter");
         loadImageButton.addActionListener(e -> {
             JFileChooser fc = new JFileChooser();
@@ -134,15 +138,16 @@ public class RecognizeTab extends JPanel {
         HashMap<Character, Double> results = new HashMap<>();
         for (int i = 0; i < networkOutput.length; i++) {
             results.put(mapper.mapInteger(i), networkOutput[i]);
+           // System.out.println(networkOutput[i]);
         }
 
         Comparator<Character> comparator = new ValueComparator<>(results);
         TreeMap<Character, Double> sortedResults = new TreeMap<>(comparator);
         sortedResults.putAll(results);
-        console.addLog("Izlazi mreze:");
+        console.addLog("Network outputs:");
         int counter = 0;
         for (Map.Entry<Character, Double> entry : sortedResults.entrySet()) {
-            if (entry.getValue() <= 0.02 && counter > 9) break;
+            if (entry.getValue() <= 0.02 || counter > 1) break;
             console.addLog(entry.getKey() + " => " + Math.round(entry.getValue() * 1000)/1000.0);
             counter++;
         }

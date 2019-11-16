@@ -4,20 +4,26 @@
 <style>
 body {
 	position: relative;
-	background-image: url(login.jpg); //
-	background-repeat: repeat-y; //
-	background-repeat: repeat-y;
+	font-size : 20px;
+	
+}
+th{
+	width:90px;
+	
+	border: 2px solid white;
+	text-align:center; 
 }
 
 table {
 	position: relative;
+	background-color:white;
 }
 
 #div {
 	margin: auto;
-	background-color: #C0C0C0;
-	height: 50%;
-	width: 40%;
+	background-color: white;
+	 height: 50%;
+	max-width: 60%;
 }
 
 hr {
@@ -26,6 +32,7 @@ hr {
 
 td {
 	vertical-align: top;
+	padding:5px;
 }
 
 input[type="radio"] {
@@ -33,14 +40,21 @@ input[type="radio"] {
 	width: 17px;
 	height: 17px;
 }
+
+input[type="checkbox"] {
+	vertical-align: bottom;
+	width: 17px;
+	height: 17px;
+
+}
 </style>
 <meta charset="UTF-8">
 <title>Survey</title>
 </head>
 <body>
-	<h1 align=center>MEMBER SATISFACTION SURVEY</h1>
+	<h1 align=center>WELCOME <span id=Fname></span>TO MEMBER SATISFACTION SURVEY</h1>
 	<div id="div">
-		<form action="/survey" method="post">
+		<form action="/survey" method="post" >
 
 			<table class="table">
 
@@ -55,7 +69,12 @@ input[type="radio"] {
 		$(document)
 				.ready(
 						function() {
-
+								
+							$.get("/getAuthenticatedFname",function(data){
+								//alert(data);
+								$("#Fname").text(data+ ", " );
+							});
+		
 							$
 									.get(
 											"/getAll",
@@ -64,21 +83,53 @@ input[type="radio"] {
 												// $( "div" ).append( JSON.stringfy(data));
 												for (j = 0; j < data.length; j++) {
 													var x = '	<tr class="border">	<td>'
-															+j
+															+(j+1)
 															+ '.&nbsp<td>';
 													x += data[j].qDescription
 															+ '</tr>	';
+													if(data[j].aType != "multiple"){
+													
 													for (i = 0; i < data[j].answer.length; i++) {
 														
 														x += '<tr><td><td><input type="'+data[j].aType+'" class="check" name="'+data[j].qId+'" value="'+data[j].answer[i].aId+ '">'
 																+ data[j].answer[i].aDescription
 																+ '</tr>		<tr><td>			<td>';
-													}
+														}
 													x += '	<tr><td colspan="2"><hr></tr>';
-
-													$("table").append(x);
+													}else{
+														x +='<tr><td></td><td><table border=1 frame=void rules=rows >';
+														var ans;
+														for (i = 0; i < data[j].subQuestion.length; i++) {
+																if(i == 0){
+																	x +='<tr><th colspan=2 style="background-color:#85d8ed; width:40%" >';
+																	//alert(data[j].subQuestion[i].answer[0].adescription);
+																	ans = data[j].subQuestion[i].answer.length;
+																	for(k =0 ;k < ans; k++){
+																		
+																		x +='<th style="background-color:#85d8ed"> '+data[j].subQuestion[i].answer[k].aDescription+'</th>';
+																	}
+																	x +='</tr>';
+																}
+																	//alert(data[j].subQuestion[i].answer[i].adescription);
+																x +='<tr><td>'+ data[j].subQuestion[i].qDescription+'</td><td></td>';
+																for(k =0 ;k < ans; k++){
+																	
+																	x +='<td><input type=radio name ='+data[j].qId+' value='+data[j].subQuestion[i].id+'C'+data[j].subQuestion[0].answer[k].aId+'></td>';
+																}
+																//x += '<tr><hr></tr>';
+																x +='</tr>';
+																
+														}
+														x +='</table></td></tr>';
+														
+														x += '<tr><td colspan="2"><hr></tr>';
+														
+													}x+='<tr><td><td align="right"><h3 align="left"><span style="vertical-align:top">Comments and suggestions: </span><textarea maxlength="255" name="commentC'+data[j].qId+'" cols="50" rows="3" style="border-top:none;border-right:none;border-left:none; " placeholder="Type your comments here"></textarea></h3></tr>';
+													$(".table").append(x);
 													//$("table").append(x);
 													//alert( );
+													
+													
 												}
 												
 

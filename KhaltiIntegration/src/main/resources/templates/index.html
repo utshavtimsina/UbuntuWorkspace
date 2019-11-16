@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+ <script src="https://khalti.com/static/khalti-checkout.js"></script>
+ <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+<body>
+    ...	
+    <!-- Place this where you need payment button -->
+    <div class = "results">
+    </div>
+    <button id="payment-button">Pay with Khalti</button>
+    <!-- Place this where you need payment button -->
+    <!-- Paste this code anywhere in you body tag -->
+    <script>
+        var config = {
+            // replace the publicKey with yours
+            "publicKey": "test_public_key_d9cfa9d1a0ff4d7c8a95263b7ba755ac",
+           	"productIdentity": "1234567890",
+            "productName": "Dragon",
+            "productUrl": "http://gameofthrones.wikia.com/wiki/Dragons",
+            "eventHandler": {
+            	
+                onSuccess (payload) {
+                	// $("body").prepend( JSON.stringify(payload));			
+                    // hit merchant api for initiating verfication
+                 $.post( "/paymentVerify", function( data ) {
+                	  $(".results").append(data);
+                	  });//*/
+                    console.log(payload);
+                    
+                },
+                onError (error) {
+                    console.log(error);
+                },
+                onClose () {
+                    console.log('widget is closing');
+                }
+            }
+        };
+
+        var checkout = new KhaltiCheckout(config);
+        var btn = document.getElementById("payment-button");
+        btn.onclick = function () {
+            checkout.show({amount: 1000});
+        }
+    </script>
+</body>
+</html>
