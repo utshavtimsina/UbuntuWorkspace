@@ -14396,3 +14396,152 @@ org.eclipse.jdt.core.JavaModelException: <project root> [in EmailSender] is not 
 2019-11-16 07:59:47,729 [Worker-8: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
 2019-11-16 07:59:47,736 [Worker-8: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2019-11-16 07:59:47,737 [Worker-8: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/utshav/Documents/EclipseWorkspace/springboot-jdbi-integration/src/test/resources
+2019-11-16 08:03:15,384 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2019-11-16 08:03:21,897 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.timsina:Day5_Feedback_form:0.0.1-SNAPSHOT @ /home/utshav/Documents/EclipseWorkspace/Day5_Feedback_form/pom.xml.
+2019-11-16 08:03:22,950 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.famas:Day15_SpringMail:0.0.1-SNAPSHOT @ /home/utshav/Documents/EclipseWorkspace/Day15_SpringMail/pom.xml.
+2019-11-16 08:03:23,838 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.famas:KhaltiIntegration:0.0.1-SNAPSHOT @ /home/utshav/Documents/EclipseWorkspace/KhaltiIntegration/pom.xml.
+2019-11-16 08:03:24,142 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.famas:Day13_Form_Security:0.0.1-SNAPSHOT @ /home/utshav/Documents/EclipseWorkspace/Day13_Form_Security/pom.xml.
+2019-11-16 08:03:24,559 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.famas:Day16_BeanValidation:0.0.1-SNAPSHOT @ /home/utshav/Documents/EclipseWorkspace/Day16_BeanValidation/pom.xml.
+2019-11-16 08:03:25,485 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: hr.fer.zemris:zavrad:1.0-SNAPSHOT @ /home/utshav/Documents/EclipseWorkspace/final-thesis-master/Project/pom.xml.
+2019-11-16 08:03:25,944 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.timsina:Day6_Hibernate_Relationship:0.0.1-SNAPSHOT @ /home/utshav/Documents/EclipseWorkspace/Day6_Hibernate_Relationship/pom.xml.
+2019-11-16 08:03:26,308 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.famas:Day10_Exception_Handling:0.0.1-SNAPSHOT @ /home/utshav/Documents/EclipseWorkspace/Day10_Exception_Handling/pom.xml.
+2019-11-16 08:03:26,582 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.example:Day4_FormInputOutput:0.0.1-SNAPSHOT @ /home/utshav/Documents/EclipseWorkspace/Day4_FormInputOutput/pom.xml.
+2019-11-16 08:03:26,880 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.famas:Day10_Spring_security:0.0.1-SNAPSHOT @ /home/utshav/Documents/EclipseWorkspace/Day10_Spring_security/pom.xml.
+2019-11-16 08:03:27,302 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.famas:Day12_Spring_security-1:0.0.1-SNAPSHOT @ /home/utshav/Documents/EclipseWorkspace/Day12_Spring_security-1/pom.xml.
+2019-11-16 08:03:27,596 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.timsina:Day9_JDBI:0.0.1-SNAPSHOT @ /home/utshav/Documents/EclipseWorkspace/Day9_JDBI/pom.xml.
+2019-11-16 08:03:27,838 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.famas:spring-jdbi-integration-2:V1.0 @ /home/utshav/Documents/EclipseWorkspace/springboot-jdbi-integration/pom.xml.
+2019-11-16 08:03:28,086 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.example:Day4_Form:0.0.1-SNAPSHOT @ /home/utshav/Documents/EclipseWorkspace/Day4_Form/pom.xml.
+2019-11-16 08:03:28,477 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.example:Day4_404Error:0.0.1-SNAPSHOT @ /home/utshav/Documents/EclipseWorkspace/Day4_404Error/pom.xml.
+2019-11-16 08:03:35,659 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day10_Exception_Handling/src/main/java
+2019-11-16 08:03:35,660 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day10_Exception_Handling/src/main/resources
+2019-11-16 08:03:35,663 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day10_Exception_Handling/src/main/resources
+2019-11-16 08:03:35,670 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day10_Exception_Handling/src/test/java
+2019-11-16 08:03:36,134 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day10_Spring_security/src/main/java
+2019-11-16 08:03:36,153 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day10_Spring_security/src/main/resources
+2019-11-16 08:03:36,154 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day10_Spring_security/src/main/resources
+2019-11-16 08:03:36,163 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day10_Spring_security/src/test/java
+2019-11-16 08:03:36,472 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day12_Spring_security-1/src/main/java
+2019-11-16 08:03:36,472 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day12_Spring_security-1/src/main/resources
+2019-11-16 08:03:36,475 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day12_Spring_security-1/src/main/resources
+2019-11-16 08:03:36,476 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day12_Spring_security-1/src/test/java
+2019-11-16 08:03:37,003 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day13_Form_Security/src/main/java
+2019-11-16 08:03:37,019 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day13_Form_Security/src/main/resources
+2019-11-16 08:03:37,020 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day13_Form_Security/src/main/resources
+2019-11-16 08:03:37,025 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day13_Form_Security/src/test/java
+2019-11-16 08:03:37,655 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day15_SpringMail/src/main/java
+2019-11-16 08:03:37,661 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day15_SpringMail/src/main/resources
+2019-11-16 08:03:37,661 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day15_SpringMail/src/main/resources
+2019-11-16 08:03:37,662 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day15_SpringMail/src/test/java
+2019-11-16 08:03:38,080 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day16_BeanValidation/src/main/java
+2019-11-16 08:03:38,080 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day16_BeanValidation/src/main/resources
+2019-11-16 08:03:38,081 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day16_BeanValidation/src/main/resources
+2019-11-16 08:03:38,085 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day16_BeanValidation/src/test/java
+2019-11-16 08:03:38,428 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day4_404Error/src/main/java
+2019-11-16 08:03:38,428 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day4_404Error/src/main/resources
+2019-11-16 08:03:38,429 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day4_404Error/src/main/resources
+2019-11-16 08:03:38,430 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day4_404Error/src/test/java
+2019-11-16 08:03:38,887 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day4_Form/src/main/java
+2019-11-16 08:03:38,893 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day4_Form/src/main/resources
+2019-11-16 08:03:38,894 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day4_Form/src/main/resources
+2019-11-16 08:03:38,895 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day4_Form/src/test/java
+2019-11-16 08:03:39,432 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day4_FormInputOutput/src/main/java
+2019-11-16 08:03:39,432 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day4_FormInputOutput/src/main/resources
+2019-11-16 08:03:39,433 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day4_FormInputOutput/src/main/resources
+2019-11-16 08:03:39,436 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day4_FormInputOutput/src/test/java
+2019-11-16 08:03:39,851 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day5_Feedback_form/src/main/java
+2019-11-16 08:03:39,852 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day5_Feedback_form/src/main/resources
+2019-11-16 08:03:39,852 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day5_Feedback_form/src/main/resources
+2019-11-16 08:03:39,853 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day5_Feedback_form/src/test/java
+2019-11-16 08:03:40,462 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day6_Hibernate_Relationship/src/main/java
+2019-11-16 08:03:40,464 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day6_Hibernate_Relationship/src/main/resources
+2019-11-16 08:03:40,464 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day6_Hibernate_Relationship/src/main/resources
+2019-11-16 08:03:40,469 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day6_Hibernate_Relationship/src/test/java
+2019-11-16 08:03:40,792 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day9_JDBI/src/main/java
+2019-11-16 08:03:40,793 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day9_JDBI/src/main/resources
+2019-11-16 08:03:40,794 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /Day9_JDBI/src/main/resources
+2019-11-16 08:03:40,805 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Day9_JDBI/src/test/java
+2019-11-16 08:03:41,260 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /KhaltiIntegration/src/main/java
+2019-11-16 08:03:41,265 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /KhaltiIntegration/src/main/resources
+2019-11-16 08:03:41,266 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /KhaltiIntegration/src/main/resources
+2019-11-16 08:03:41,269 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /KhaltiIntegration/src/test/java
+2019-11-16 08:03:43,971 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Project/src/main/java
+2019-11-16 08:03:43,981 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /Project/src/test/java
+2019-11-16 08:03:44,344 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /springboot-jdbi-integration/src/main/java
+2019-11-16 08:03:44,344 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /springboot-jdbi-integration/src/main/resources
+2019-11-16 08:03:44,345 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /springboot-jdbi-integration/src/main/resources
+2019-11-16 08:03:44,345 [Worker-15: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /springboot-jdbi-integration/src/test/java
+2019-11-16 08:03:48,580 [Worker-15: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 33 sec
+2019-11-16 08:03:52,766 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:03:52,773 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-11-16 08:03:52,844 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-11-16 08:03:52,854 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:03:52,854 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/utshav/Documents/EclipseWorkspace/Day10_Exception_Handling/src/test/resources
+2019-11-16 08:03:57,758 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:03:57,759 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-11-16 08:03:57,760 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-11-16 08:03:57,770 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:03:57,770 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/utshav/Documents/EclipseWorkspace/Day10_Spring_security/src/test/resources
+2019-11-16 08:04:02,912 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:02,914 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-11-16 08:04:02,916 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 15 resources
+2019-11-16 08:04:03,084 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:03,084 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/utshav/Documents/EclipseWorkspace/Day12_Spring_security-1/src/test/resources
+2019-11-16 08:04:06,539 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:06,540 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-11-16 08:04:06,545 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-11-16 08:04:06,557 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:06,557 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/utshav/Documents/EclipseWorkspace/Day13_Form_Security/src/test/resources
+2019-11-16 08:04:09,732 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:09,732 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-11-16 08:04:09,733 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-11-16 08:04:09,747 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:09,747 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/utshav/Documents/EclipseWorkspace/Day15_SpringMail/src/test/resources
+2019-11-16 08:04:12,432 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:12,446 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-11-16 08:04:12,461 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-11-16 08:04:12,475 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:12,475 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/utshav/Documents/EclipseWorkspace/Day16_BeanValidation/src/test/resources
+2019-11-16 08:04:15,712 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:15,713 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-11-16 08:04:15,786 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 2 resources
+2019-11-16 08:04:15,842 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:15,842 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/utshav/Documents/EclipseWorkspace/Day4_404Error/src/test/resources
+2019-11-16 08:04:18,559 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:18,560 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-11-16 08:04:18,567 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-11-16 08:04:18,597 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:18,597 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/utshav/Documents/EclipseWorkspace/Day4_Form/src/test/resources
+2019-11-16 08:04:20,645 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:20,645 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-11-16 08:04:20,647 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 2 resources
+2019-11-16 08:04:20,679 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:20,679 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/utshav/Documents/EclipseWorkspace/Day4_FormInputOutput/src/test/resources
+2019-11-16 08:04:24,242 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:24,242 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-11-16 08:04:24,322 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2019-11-16 08:04:24,367 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:24,367 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/utshav/Documents/EclipseWorkspace/Day5_Feedback_form/src/test/resources
+2019-11-16 08:04:27,630 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:27,633 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-11-16 08:04:27,694 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-11-16 08:04:27,701 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:27,702 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/utshav/Documents/EclipseWorkspace/Day6_Hibernate_Relationship/src/test/resources
+2019-11-16 08:04:30,527 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:30,532 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-11-16 08:04:30,603 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-11-16 08:04:30,607 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:30,607 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/utshav/Documents/EclipseWorkspace/Day9_JDBI/src/test/resources
+2019-11-16 08:04:34,834 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:34,835 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-11-16 08:04:34,858 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-11-16 08:04:34,879 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:04:34,879 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/utshav/Documents/EclipseWorkspace/KhaltiIntegration/src/test/resources
+2019-11-16 08:04:48,683 [Worker-15: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-11-16 08:04:48,857 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/utshav/Documents/EclipseWorkspace/final-thesis-master/Project/src/main/resources
+2019-11-16 08:04:48,859 [Worker-15: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-11-16 08:04:48,860 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/utshav/Documents/EclipseWorkspace/final-thesis-master/Project/src/test/resources
+2019-11-16 08:05:20,092 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:05:20,154 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-11-16 08:05:20,181 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-11-16 08:05:20,186 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-11-16 08:05:20,187 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/utshav/Documents/EclipseWorkspace/springboot-jdbi-integration/src/test/resources
