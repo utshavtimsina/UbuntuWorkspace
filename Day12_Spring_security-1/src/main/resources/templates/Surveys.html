@@ -49,7 +49,7 @@ input[type="checkbox"] {
 }
 </style>
 <meta charset="UTF-8">
-<title>Surveyss</title>
+<title>Surveys</title>
 </head>
 <body>
 	<h1 align=center>WELCOME <span id=Fname></span>TO MEMBER SATISFACTION SURVEY</h1>
@@ -73,6 +73,7 @@ input[type="checkbox"] {
 							$.get("/getAuthenticatedFname",function(data){
 								//alert(data); 
 								//master changes
+								//branch changes
 								$("#Fname").text(data+ ", " );
 							});
 		
