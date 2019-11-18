@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Day12SpringSecurity1Application",
+            "request": "launch",
+            "mainClass": "org.famas.main.Day12SpringSecurity1Application",
+            "projectName": "Day12_Spring_security-1"
+        }
+    ]
+}
