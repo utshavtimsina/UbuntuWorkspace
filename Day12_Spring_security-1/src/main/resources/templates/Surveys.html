@@ -47,12 +47,16 @@ input[type="checkbox"] {
 	height: 17px;
 
 }
+			float:right;
+			font-size:20px;
+			background-color:#85d8ed;
+	}
 </style>
 <meta charset="UTF-8">
 <title>Surveys</title>
 </head>
 <body>
-	<h1 align=center>WELCOME <span id=Fname></span>TO MEMBER SATISFACTION SURVEY</h1>
+	<h1 align=center>MEMBER SATISFACTION SURVEY<span id=Fname></span></h1>
 	<div id="div">
 		<form action="/survey" method="post" >
 
@@ -78,7 +82,7 @@ input[type="checkbox"] {
 								//agai
 								$("#Fname").text(":) "+data);
 							});
-		
+	
 							$
 									.get(
 											"/getAll",
