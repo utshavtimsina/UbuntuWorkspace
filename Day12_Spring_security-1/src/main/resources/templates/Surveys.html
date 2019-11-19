@@ -17,6 +17,9 @@ table {
 	position: relative;
 	background-color: white;
 }
+.horizontal{
+display:none;
+}
 
 #div {
 	margin: auto;
@@ -51,14 +54,36 @@ input[type="checkbox"] {
 	font-size: 20px;
 	background-color: #85d8ed;
 }
+
+#fas{
+	//background:black;
+	transform:rotate(90deg);
+}
+#alternate{
+	background-color:black;
+	padding:8px;
+	display:inline;
+	
+}
+#vert{
+opacity:0.5;
+ /* box-shadow: 10px 12px 0.5rem #85d8ed;
+	background:white;
+outline-offset: -30px; */
+}
 </style>
 <meta charset="UTF-8">
 <title>Surveys</title>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 <body>
 	<h1 align=center>
-		MEMBER SATISFACTION SURVEY<span id=Fname></span>
-	</h1>
+		MEMBER SATISFACTION SURVEY<span id=Fname></span></h1>
+		<div id="alternate">
+		<button type="button" id="vert" autofocus><i style='font-size:24px' id='fas'  class='fas'>&#xf039;</i></button>
+		<button type="button" id='horiz'><i style='font-size:24px'  class='fas'>&#xf039;</i></button>
+	</div>
+	
 	<div id="div">
 		<form action="/survey" method="post">
 
@@ -75,6 +100,23 @@ input[type="checkbox"] {
 		$(document)
 				.ready(
 						function() {
+						 var align =0;
+						
+							//$(".vertical").show();
+							 $("#vert").click(function(){
+									$("#horiz").css({"opacity":"1"});
+									$(".horizontal").hide();
+									$(".vertical").show();
+									$(this).css({"opacity":"0.5"});
+									align =0;
+							 });
+							 $("#horiz").click(function(){
+									$("#vert").css({"opacity":"1"});
+									$(".vertical").hide();
+									$(".horizontal").show();
+									$(this).css({"opacity":"0.5"});
+									
+							 });
 
 							$.get("/getAuthenticatedFname", function(data) {
 								//alert(data); 
@@ -98,13 +140,23 @@ input[type="checkbox"] {
 													x += data[j].qDescription
 															+ '</tr>	';
 													if (data[j].aType != "multiple") {
-
+															
+														
+														x+='<tr ><td><td><table class="vertical"><tr>';
 														for (i = 0; i < data[j].answer.length; i++) {
 
-															x += '<tr><td><td><input type="'+data[j].aType+'" class="check" name="'+data[j].qId+'" value="'+data[j].answer[i].aId+ '">'
-																	+ data[j].answer[i].aDescription
-																	+ '</tr>		<tr><td>			<td>';
+															x += '<td id="change"><input type="'+data[j].aType+'" class="check" name="'+data[j].qId+'" value="'+data[j].answer[i].aId+ '"><td>'
+																	+ data[j].answer[i].aDescription;
 														}
+														x+='</tr></table></tr>';
+														
+														for (i = 0; i < data[j].answer.length; i++) {
+															
+															x += '<tr ><td><td class="horizontal"><input type="'+data[j].aType+'" class="check" name="'+data[j].qId+'" value="'+data[j].answer[i].aId+ '">'
+																	+ data[j].answer[i].aDescription
+																	+ '</tr>';
+														}
+														
 														x += '	<tr><td colspan="2"><hr></tr>';
 													} else {
 														x += '<tr><td></td><td><table border=1 frame=void rules=rows >';
@@ -128,7 +180,7 @@ input[type="checkbox"] {
 																	+ '</td><td></td>';
 															for (k = 0; k < ans; k++) {
 
-																x += '<td><input type=radio name ='+data[j].qId+' value='+data[j].subQuestion[i].id+'C'+data[j].subQuestion[0].answer[k].aId+'></td>';
+																x += '<td><input type=radio name ='+data[j].qId+data[j].subQuestion[i].id+' value='+data[j].subQuestion[i].id+'C'+data[j].subQuestion[0].answer[k].aId+'></td>';
 															}
 															//x += '<tr><hr></tr>';
 															x += '</tr>';
@@ -147,8 +199,10 @@ input[type="checkbox"] {
 												}
 
 											});
-
+			
 						});
+		
+		
 	</script>
 </body>
 </html>

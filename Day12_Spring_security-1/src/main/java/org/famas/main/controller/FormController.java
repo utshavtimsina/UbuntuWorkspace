@@ -1,7 +1,4 @@
 package org.famas.main.controller;
-
-import java.util.List;
-
 import org.famas.main.mapper.QuestionAnswerSaveMapper;
 import org.famas.main.model.Answer;
 import org.famas.main.model.Question;
@@ -11,9 +8,6 @@ import org.famas.main.security.CustomUserDetails;
 import org.famas.main.service.FormService;
 import org.famas.main.util.Formatter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -27,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping
 @Controller
 public class FormController {
-	private final String ERROR = "error"; 
 	@Autowired
 	FormService formService;
 	BCryptPasswordEncoder passwordEncoder;
@@ -96,19 +89,12 @@ public class FormController {
 	@PostMapping("/saveQuestionAnswers")
 	@ResponseBody
 	public Object saveQuestionAnswers(@RequestBody QuestionAnswerSaveMapper questionAnswers) {
-		// Question question=(Question) format.questionAnswerFormatter(questionAnswers);
-		// return formService.saveQuestionAnswers(question);
-		// return question.getqDescription();
 		Question question = new Question();
 		question.setqDescription(questionAnswers.getQuestion());
 		question.setaType(questionAnswers.getRadio());
 
 		if (questionAnswers.getRadio().equals("multiple")) {
-			/*
-			 * if (questionAnswers.getAnswers() != null) { for (String ans :
-			 * questionAnswers.getAnswers()) { Answer answer = new Answer();
-			 * answer.setADescription(ans); question.getAnswer().add(answer); } }
-			 */
+			
 			if (questionAnswers.getQuestions() != null && questionAnswers.getAnswers() != null) {
 				for (String questions : questionAnswers.getQuestions()) {
 					SubQuestion Subq = new SubQuestion();
