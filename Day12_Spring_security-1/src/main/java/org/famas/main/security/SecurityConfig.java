@@ -22,6 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 CustomAuthenticationProvider authenticationProvider;
 @Autowired
 CustomAuthenticationSuccessHandler successHandler;
+@Autowired
 CustomAuthenticationFailureHandler authenticationFailureHandler;
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {

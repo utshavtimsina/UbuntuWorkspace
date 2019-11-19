@@ -1,4 +1,3 @@
-
 package org.famas.main.security;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -28,5 +27,7 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
 		} else {
 			redirectStrategy.sendRedirect(request, response, "/login?error=true&user=false");
 		}
+
 	}
+
 }
