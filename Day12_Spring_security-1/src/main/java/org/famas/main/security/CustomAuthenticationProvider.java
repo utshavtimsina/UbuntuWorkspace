@@ -1,8 +1,4 @@
 package org.famas.main.security;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.famas.main.service.UserDetailsService;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +7,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 @Component
@@ -24,9 +18,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 	BCryptPasswordEncoder passwordEncoder;
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		// TODO Auto-generated method stub
-		 String name = authentication.getName();
-	     String password = authentication.getCredentials().toString();
+		
+		String password = authentication.getCredentials().toString();
 	    //logger.info("Custom AUTH CALLED" + authentication.getCredentials());
 	 	
 	     CustomUserDetails customUserDetails =(CustomUserDetails) userDetails.loadUserByUsername(authentication.getName());

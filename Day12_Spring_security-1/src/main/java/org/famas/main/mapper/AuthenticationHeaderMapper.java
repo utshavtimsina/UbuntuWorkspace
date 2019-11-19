@@ -54,9 +54,6 @@ public class AuthenticationHeaderMapper {
 		this.enabled = enabled;
 	}
 
-	
-
-	
 	public Boolean getAccountNonExpired() {
 		return accountNonExpired;
 	}
