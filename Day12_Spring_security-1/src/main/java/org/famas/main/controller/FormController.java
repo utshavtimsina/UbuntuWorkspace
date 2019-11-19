@@ -27,11 +27,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping
 @Controller
 public class FormController {
-
+	private final String ERROR = "error"; 
 	@Autowired
 	FormService formService;
 	BCryptPasswordEncoder passwordEncoder;
-
+	@GetMapping("/error")
+	@ResponseBody
+	public String generateError() {
+		return "There was an Error Accessing this Page";
+	}
 	@GetMapping("/")
 	public String surveyPage() {
 		return "Surveys";
