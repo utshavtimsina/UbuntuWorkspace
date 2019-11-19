@@ -22,7 +22,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 CustomAuthenticationProvider authenticationProvider;
 @Autowired
 CustomAuthenticationSuccessHandler successHandler;
-
+@Autowired
+CustomAuthenticationFailureHandler authenticationFailureHandler;
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		// TODO Auto-generated method stub
@@ -51,6 +52,7 @@ CustomAuthenticationSuccessHandler successHandler;
 			.authenticated()
 			.and()
 			.formLogin().successHandler(successHandler)
+			.failureHandler(authenticationFailureHandler)
 			.loginPage("/login")
 			.loginProcessingUrl("/authenticate")
 			.and().logout().permitAll();
