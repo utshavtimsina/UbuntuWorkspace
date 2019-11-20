@@ -47,7 +47,8 @@ CustomAuthenticationFailureHandler authenticationFailureHandler;
 			.failureHandler(authenticationFailureHandler)
 			.loginPage("/login")
 			.loginProcessingUrl("/authenticate")
-			.and().logout().permitAll();	
+			.and()
+			.logout();	
 	}
 
 	@Bean

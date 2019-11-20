@@ -83,7 +83,7 @@ outline-offset: -30px; */
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 <body>
-	<strong><span id=Fname></span></strong><br>
+	<strong><span id=Fname> <a href="/logout">logout</a></span></strong><br>
 	<div id="content-mgmt"><h3>Content Management</h3>
 	<a href="/questionSavePage">Add questions</a><br><br>
 	<a href="/graph">See graph</a>
@@ -180,7 +180,7 @@ outline-offset: -30px; */
 								//branch changes
 								//changes by master
 								//agai
-								$("#Fname").text("User: " + data);
+								$("#Fname").prepend("User: " + data);
 							});
 
 							$
