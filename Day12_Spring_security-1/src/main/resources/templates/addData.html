@@ -74,7 +74,9 @@ var SendData;
 			<input type="radio" name="radio" id="multiple" value="multiple">
 			<label>Multiple</label>
 			<div class="data"></div>
-			<div id="answer"></div>
+			<div id="answer">
+			
+			</div>
 			<input type="button" name="add" value="Add answer" id="add"><br>
 			<br> <input type="submit" value="Submit" class=submit>
 		</form>
@@ -83,13 +85,10 @@ var SendData;
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
+		var radiobtn = "true";
+		$(document).ready(function() {
 							var counter = 0;
-							$("#add")
-									.click(
-											function() {
+							$("#add").click(function() {
 												var textArea = '<textarea rows="2" cols="40" name="answers[]" class="answers" autofocus></textarea><br>';
 												$("#answer").append(textArea);
 												//alert("clicked"); 
@@ -98,84 +97,81 @@ var SendData;
 							$("#multiple")
 									.click(
 											function() {
+												radiobtn = "false";	
+												if(radiobtn =="false"){
 												counter++;
 												if (counter == 1) {
+													
+													//alert(counter);
 													var table = '<table border="1" id="addData"><tr class="header"><td><input type="button" value="Add Answers" id="addanswers" style="width:100%; background-color:green"></tr><tr><td><input type="button" id="addquestions" value="Add Questions" style="width:100%; background-color:blue;"></tr></table>';
+													$(".data").show();
 													$(".data").append(table);
-													$("#add").css({
-														'display' : 'none'
-													});
-												} else {
+													$("#answer").html('');
+													$("#answer").hide();
+													$("#add").hide();
+													
+												} 
+												
+												else {
+													
+													//alert("else");
+													var table = '<table border="1" id="addData"><tr class="header"><td><input type="button" value="Add Answers" id="addanswers" style="width:100%; background-color:green"></tr><tr><td><input type="button" id="addquestions" value="Add Questions" style="width:100%; background-color:blue;"></tr></table>';
+													$(".data").show();
+													$(".data").html('');
+													$(".data").append(table);
+													$("#answer").html('');
+													$("#answer").hide();
+													$("#add").hide();
+													
+														
 												}
+												}
+												
+												else{
+													
+												}
+												
 											});
 
-							/* $(".submit").click(function() {
-								val = $('form').serialize();
-								$.post('/saveQuestionAnswers', // url
-								val, // data to be submit
-								function(data, status, jqXHR) {// success callback
-									//alert(data);
-								})
-								// alert($("form").serialize());
-							}); */
-
+							$(".radiobtn").click(function() {
+								//alert("okay");
+								$(".data").html('');
+								$(".data").hide();
+								$("#answer").show();
+								$("#add").show();
+								
+							});
 						});
+		
+		
 
-		$(document)
-				.on(
-						"click",
-						function() {
+		
 
-							$("#addanswers")
-									.click(
-											function() {
-
+							$(".data").on("click","#addanswers",function() {
+												//alert(radiobtn);
 												//alert("trying to add <td>");
 												var tableData = '<td><input type="text" name="answers[]"><button type="button" class="remove"><i class="far fa-trash-alt"></i></button></td>';
 												$(".header").append(tableData);
 
-												$(document).off('click');
+												$(this).off('click');
 											});
 
-							$("#addquestions")
-									.click(
-											function() {
+							$(".data").on("click","#addquestions",function() {
 												var tableRow = '<tr><td><input type="text" id="questions" name="questions[]"><button type="button" class="remove"><i class="far fa-trash-alt"></i></button></td>'
 
 												$("#addData").append(tableRow);
-												$(document).off('click');
+												$(this).off('click');
 											});
 
-							$(".remove").click(function() {
-
+							$(".data").on("click",".remove",function() {
 								$(this).parent().remove();
-								$(document).off('click');
+								$(this).off('click');
 							});
 							
-							$(".radiobtn").click(function() {
-								$(".data").css({
-									'display' : 'none'
-								});
+							
+							
 
-								$("#add").css({
-
-									'display' : 'block'
-								});
-
-								$("#multiple").click(function() {
-
-									$(".data").css({
-										
-										'display' : 'block'
-									});
-									$(document).off('click');
-									
-								})
-
-								$(document).off('click');
-							});
-
-						});
+						
 	</script>
 
 

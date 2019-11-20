@@ -143,7 +143,13 @@ public class FormController {
 		}
 		return "User has not submitted anything!!!!!";
 	}
-
+	
+	
+	@GetMapping("/graph")
+	public String showGrpah() {
+		return "infograph";
+		
+	}
 	@GetMapping("/getAllUsers")
 	@ResponseBody
 	public Object getAllUsers() {

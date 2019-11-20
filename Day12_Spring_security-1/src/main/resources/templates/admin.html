@@ -50,9 +50,9 @@ input[type="checkbox"] {
 }
 
 #Fname {
-	float: right;
+	
 	font-size: 20px;
-	background-color: #85d8ed;
+	//background-color: #85d8ed;
 }
 
 #fas{
@@ -71,12 +71,24 @@ opacity:0.5;
 	background:white;
 outline-offset: -30px; */
 }
+#content-mgmt{
+		float:left;
+		background-color:#bcf6f7;
+		text-align:center;
+		padding:5px;
+}
 </style>
 <meta charset="UTF-8">
 <title>Surveys</title>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 <body>
+	<strong><span id=Fname></span></strong><br>
+	<div id="content-mgmt"><h3>Content Management</h3>
+	<a href="/questionSavePage">Add questions</a><br><br>
+	<a href="/graph">See graph</a>
+	</div>
+  	
 		<script type="text/javascript" src="../src/form2js.js"></script>
 		<script type="text/javascript">
 	var SendData;
@@ -120,21 +132,21 @@ outline-offset: -30px; */
 			
 		
 	</script>
-	<h1 align=center>
-		Delete Questions and Answers<span id=Fname></span></h1>
+	
 		<!-- <div id="alternate">
 		<button type="button" id="vert" autofocus><i style='font-size:24px' id='fas'  class='fas'>&#xf039;</i></button>
 		<button type="button" id='horiz'><i style='font-size:24px'  class='fas'>&#xf039;</i></button>
 	</div> -->
 	
 	<div id="div">
+	<h1 align=center>Delete Questions and Answers</h1>
 		<form id="testForm" action="javascript:test()" >
 
 			<table class="table">
 
 
 			</table>
-			<input type="submit" class="submit" value="Submit">
+			
 		</form>
 	</div>
 	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
@@ -188,7 +200,7 @@ outline-offset: -30px; */
 														
 													
 														for (i = 0; i < data[j].answer.length; i++) {
-															
+																
 															x += '<tr ><td><td class="horizontal">'
 																	+ data[j].answer[i].aDescription
 																	+ '<td class="horizontal"><input type="checkbox" name="answer[]" value="'+data[j].answer[i].aId+'"></tr>';
