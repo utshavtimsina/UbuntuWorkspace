@@ -194,7 +194,7 @@ outline-offset: -30px; */
 														x+=	'&nbsp<td>';
 															
 													x += data[j].qDescription
-															+ '<td><input type="checkbox" name=question[] value="'+data[j].qId+'"></tr>	';
+															+ '<td align=center><input type="checkbox" name=question[] value="'+data[j].qId+'"></tr>	';
 													if (data[j].aType != "multiple") {
 															
 														
@@ -211,7 +211,7 @@ outline-offset: -30px; */
 														if(data[j].subQuestion.length != 0){
 														x += '<tr><td></td><td><table   ><tr><td><td>';
 														for(t=0 ;t<data[j].subQuestion[0].answer.length; t++){
-															x+='<td><input type="checkbox" name="answer[]" value="'+data[j].subQuestion[0].answer[t].aId+'">';
+															x+='<td align=center><input type="checkbox" name="answer[]" value="'+data[j].subQuestion[0].answer[t].aId+'">';
 														}
 														x+='</tr>';
 														var ans;
