@@ -164,4 +164,16 @@ public class FormService {
 		repo.saveNewUser(st);
 	}
 
+	public void deleteQuestionById(int id) {
+		repo.deleteQuestionById(id);
+	}
+
+	public void deleteAnswerById(int id) {
+		repo.deleteAnswerById(id);
+	}
+
+	public void deleteSubQuestionById(int id) {
+		repo.deleteSubQuestionById(id);
+	}
+
 }

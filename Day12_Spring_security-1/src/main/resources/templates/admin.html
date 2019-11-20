@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+	position: relative;
+	font-size: 20px;
+}
+
+th {
+	width: 90px;
+	border: 2px solid white;
+	text-align: center;
+}
+
+table {
+	position: relative;
+	background-color: white;
+}
+.vertical{
+display:none;
+}
+
+#div {
+	margin: auto;
+	background-color: white;
+	height: 50%;
+	max-width: 60%;
+}
+
+hr {
+	background-color: black;
+}
+
+td {
+	vertical-align: top;
+	padding: 5px;
+}
+
+input[type="radio"] {
+	vertical-align: bottom;
+	width: 17px;
+	height: 17px;
+}
+
+input[type="checkbox"] {
+	vertical-align: bottom;
+	width: 17px;
+	height: 17px;
+}
+
+#Fname {
+	float: right;
+	font-size: 20px;
+	background-color: #85d8ed;
+}
+
+#fas{
+	//background:black;
+	transform:rotate(90deg);
+}
+#alternate{
+	background-color:black;
+	padding:8px;
+	display:inline;
+	
+}
+#vert{
+opacity:0.5;
+ /* box-shadow: 10px 12px 0.5rem #85d8ed;
+	background:white;
+outline-offset: -30px; */
+}
+</style>
+<meta charset="UTF-8">
+<title>Surveys</title>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+</head>
+<body>
+		<script type="text/javascript" src="../src/form2js.js"></script>
+		<script type="text/javascript">
+	var SendData;
+		function test()
+		{
+			var formData = form2js('testForm', '.', true,
+					function(node)
+					{
+						if (node.id && node.id.match(/callbackTest/))
+						{
+							return { name: node.id, value: node.innerHTML };
+						}
+					});
+			 SendData = JSON.stringify(formData);
+			// alert(SendData);
+			 $.ajax({
+					type : "POST",
+					url : "/delete",
+					data : SendData,
+					//dataType : "json",
+					contentType : 'application/json',					
+					success:function(data){
+							//alert(JSON.stringify(data));
+							//location.reload();
+							$("body").html(data);
+					}
+				});
+		}
+	
+			
+			
+			
+			/* $(document).on("click",function(){
+				$.ajax({
+					type : "POST",
+					url : "/user",
+					data : datas,
+					dataType : "json",
+					contentType : 'application/json'					
+				});	 */
+			
+		
+	</script>
+	<h1 align=center>
+		Delete Questions and Answers<span id=Fname></span></h1>
+		<!-- <div id="alternate">
+		<button type="button" id="vert" autofocus><i style='font-size:24px' id='fas'  class='fas'>&#xf039;</i></button>
+		<button type="button" id='horiz'><i style='font-size:24px'  class='fas'>&#xf039;</i></button>
+	</div> -->
+	
+	<div id="div">
+		<form id="testForm" action="javascript:test()" >
+
+			<table class="table">
+
+
+			</table>
+			<input type="submit" class="submit" value="Submit">
+		</form>
+	</div>
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+						 var align =0;
+						
+							//$(".vertical").show();
+							//  $("#vert").click(function(){
+							// 		$("#horiz").css({"opacity":"1"});
+							// 		$(".horizontal").hide();
+							// 		$(".vertical").show();
+							// 		$(this).css({"opacity":"0.5"});
+							// 		align =0;
+							//  });
+							//  $("#horiz").click(function(){
+							// 		$("#vert").css({"opacity":"1"});
+							// 		$(".vertical").hide();
+							// 		$(".horizontal").show();
+							// 		$(this).css({"opacity":"0.5"});
+									
+							//  });
+
+							$.get("/getAuthenticatedFname", function(data) {
+								//alert(data); 
+								//master changes
+								//branch changes
+								//changes by master
+								//agai
+								$("#Fname").text("User: " + data);
+							});
+
+							$
+									.get(
+											"/getAll",
+											function(data) {
+												//data = jQuery.parseJSON(data);
+												// $( "div" ).append( JSON.stringfy(data));
+												for (j = 0; j < data.length; j++) {
+													var x = '<tr><td><td><td><button name="" type=submit ><i class="fas fa-trash"></i> </button><tr class="border">	<td>'
+														x+=	'&nbsp<td>';
+															
+													x += data[j].qDescription
+															+ '<td><input type="checkbox" name=question[] value="'+data[j].qId+'"></tr>	';
+													if (data[j].aType != "multiple") {
+															
+														
+													
+														for (i = 0; i < data[j].answer.length; i++) {
+															
+															x += '<tr ><td><td class="horizontal">'
+																	+ data[j].answer[i].aDescription
+																	+ '<td class="horizontal"><input type="checkbox" name="answer[]" value="'+data[j].answer[i].aId+'"></tr>';
+														}
+														
+														x += '	<tr><td colspan="2"><hr></tr>';
+													} else {
+														if(data[j].subQuestion.length != 0){
+														x += '<tr><td></td><td><table   ><tr><td><td>';
+														for(t=0 ;t<data[j].subQuestion[0].answer.length; t++){
+															x+='<td><input type="checkbox" name="answer[]" value="'+data[j].subQuestion[0].answer[t].aId+'">';
+														}
+														x+='</tr>';
+														var ans;
+														for (i = 0; i < data[j].subQuestion.length; i++) {
+															if (i == 0) {
+																x += '<tr><th colspan=2 style="background-color:#85d8ed; width:40%" >';
+																//alert(data[j].subQuestion[i].answer[0].adescription);
+																ans = data[j].subQuestion[i].answer.length;
+																for (k = 0; k < ans; k++) {
+
+																	x += '<th style="background-color:#85d8ed"> '
+																			+ data[j].subQuestion[i].answer[k].aDescription
+																			+ '</th>';
+																}
+																x += '</tr>';
+															}
+															//alert(data[j].subQuestion[i].answer[i].adescription);
+															x += '<tr><td><input type="checkbox" name="subquestion[]" value="'+data[j].subQuestion[i].id+'"><td  >'
+																	+ data[j].subQuestion[i].qDescription
+																	+ '</td></td>';
+															for (k = 0; k < ans; k++) {
+
+																x += '<td></td>';
+															}
+															//x += '</td>';
+															x += '</tr>';
+
+														}
+														x += '</table></td></tr>';
+													}
+														x += '<tr><td colspan="2"><hr></tr>';
+													
+												}
+													//x += '<tr><td><td align="right"><h3 align="left"><span style="vertical-align:top">Comments and suggestions: </span><textarea maxlength="255" name="commentC'+data[j].qId+'" cols="50" rows="3" style="border-top:none;border-right:none;border-left:none; " placeholder="Type your comments here"></textarea></h3></tr>';
+													$(".table").append(x);
+													//$("table").append(x);
+													//alert( );
+
+												}
+
+											});
+			
+						});
+		
+		
+	</script>
+</body>
+</html>

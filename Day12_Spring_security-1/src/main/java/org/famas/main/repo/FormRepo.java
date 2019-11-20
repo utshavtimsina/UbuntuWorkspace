@@ -109,4 +109,13 @@ public interface FormRepo {
 	
 	@SqlUpdate("INSERT INTO user (username,password,firstname,role_id) VALUES(:username,:password,:firstName,2)")
 	public void saveNewUser(@BindBean UserDto st);
+
+	@SqlUpdate("DELETE FROM question WHERE q_id = :id ")
+	public void deleteQuestionById(@Bind int id);
+	
+	@SqlUpdate("DELETE FROM answer WHERE a_id = :id")
+	public void deleteAnswerById(@Bind int id);
+
+	@SqlUpdate("DELETE FROM sub_question WHERE id = :id")
+	public void deleteSubQuestionById(@Bind int id);
 }

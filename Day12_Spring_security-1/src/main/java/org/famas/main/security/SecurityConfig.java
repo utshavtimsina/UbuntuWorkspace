@@ -38,7 +38,7 @@ CustomAuthenticationFailureHandler authenticationFailureHandler;
 			.httpBasic().disable()
 			.authorizeRequests()
 			.antMatchers("/questionSavePage","/getUserById","/saveQuestionAnswers","/admin","/adminIndividualResults/*").hasAuthority("ROLE_ADMIN")
-			.antMatchers("/survey","/").hasAuthority("ROLE_USER")
+			.antMatchers("/survey").hasAuthority("ROLE_USER")
 			//.antMatchers("/getAll").permitAll()
 			.antMatchers("/**").permitAll()
 			//.antMatchers("/resources/static/**").permitAll()

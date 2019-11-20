@@ -1,6 +1,7 @@
 package org.famas.main.controller;
 import org.famas.main.mapper.QuestionAnswerSaveMapper;
 import org.famas.main.model.Answer;
+import org.famas.main.model.DeleteAnswerModel;
 import org.famas.main.model.Question;
 import org.famas.main.model.SubQuestion;
 import org.famas.main.model.UserDto;
@@ -44,7 +45,7 @@ public class FormController {
 	@GetMapping("/getAuthenticatedFname")
 	@ResponseBody
 	public String getAuthenticatedUserName() {
-		CustomUserDetails authenticationToken = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		final CustomUserDetails authenticationToken = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return authenticationToken.getUser().getFirstName();
 	}
 	
@@ -63,7 +64,7 @@ public class FormController {
 	}
 	@PostMapping("/registerNewUser")
 	@ResponseBody
-	public void registerNewUserWithDetails(@RequestBody UserDto st) {
+	public void registerNewUserWithDetails(@RequestBody final UserDto st) {
 		formService.saveNewUser(st);
 		//return "hp";
 	}
@@ -73,9 +74,9 @@ public class FormController {
 
 	@PostMapping("/survey")
 	@ResponseBody
-	public Object saveUserSurveyAnswer(@RequestBody String surveyAnswers) {
+	public Object saveUserSurveyAnswer(@RequestBody final String surveyAnswers) {
 		//return surveyAnswers;
-		CustomUserDetails authen = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		final CustomUserDetails authen = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if(!formService.hasUserAlreadySubmittedForm(authen.getUser().getId()) ) {
 			formService.createNewUserSurvey(authen.getUser().getId());
 			return format.formatter(surveyAnswers);
@@ -88,19 +89,19 @@ public class FormController {
 
 	@PostMapping("/saveQuestionAnswers")
 	@ResponseBody
-	public Object saveQuestionAnswers(@RequestBody QuestionAnswerSaveMapper questionAnswers) {
-		Question question = new Question();
+	public Object saveQuestionAnswers(@RequestBody final QuestionAnswerSaveMapper questionAnswers) {
+		final Question question = new Question();
 		question.setqDescription(questionAnswers.getQuestion());
 		question.setaType(questionAnswers.getRadio());
 
 		if (questionAnswers.getRadio().equals("multiple")) {
 			
 			if (questionAnswers.getQuestions() != null && questionAnswers.getAnswers() != null) {
-				for (String questions : questionAnswers.getQuestions()) {
-					SubQuestion Subq = new SubQuestion();
+				for (final String questions : questionAnswers.getQuestions()) {
+					final SubQuestion Subq = new SubQuestion();
 					Subq.setqDescription(questions);
-					for (String ans : questionAnswers.getAnswers()) {
-						Answer answer = new Answer();
+					for (final String ans : questionAnswers.getAnswers()) {
+						final Answer answer = new Answer();
 						answer.setaDescription(ans);
 						Subq.getAnswer().add(answer);
 					}
@@ -110,8 +111,8 @@ public class FormController {
 		} else {
 			if (questionAnswers.getAnswers() != null) {
 
-				for (String ans : questionAnswers.getAnswers()) {
-					Answer answer = new Answer();
+				for (final String ans : questionAnswers.getAnswers()) {
+					final Answer answer = new Answer();
 					answer.setaDescription(ans);
 					question.getAnswer().add(answer);
 				}
@@ -125,18 +126,18 @@ public class FormController {
 
 	@GetMapping("/getUserById/{id}")
 	@ResponseBody
-	public Object getUserById(@PathVariable int id) {
+	public Object getUserById(@PathVariable final int id) {
 		return formService.getUserById(id);
 	}
 
 	@GetMapping("/admin")
 	public String generateSurveyAnalysis() {
-		return "infograph";
+		return "admin";
 	}
 
 	@GetMapping("/adminIndividualResults/{id}")
 	@ResponseBody
-	public Object generateIndividualSurveyAnalysis(@PathVariable int id) {
+	public Object generateIndividualSurveyAnalysis(@PathVariable final int id) {
 		if(formService.hasUserAlreadySubmittedForm(id)) {
 			return formService.getResultsByUserId(id);
 		}
@@ -153,5 +154,34 @@ public class FormController {
 	@ResponseBody
 	public Object generateOverallResult() {
 		return formService.generateOverallResult();
+	}
+
+	@GetMapping("/deleteQuestionAnswer")
+	public String deleteQuestionAnswer(){
+		return "admin";
+	}
+
+	@PostMapping("/delete")
+	public Object deleteWithIds(@RequestBody DeleteAnswerModel ids){
+		//return ids;
+			
+		if(ids.getQuestion() != null){
+			for(int questId : ids.getQuestion()){
+				formService.deleteQuestionById(questId);
+			}
+		}
+		
+		if(ids.getAnswer() != null){
+			for(int ansId:ids.getAnswer())	{
+				formService.deleteAnswerById(ansId);
+			}	
+		}
+		if(ids.getSubquestion() != null){
+			for(int subQuestId:ids.getSubquestion()){
+				formService.deleteSubQuestionById(subQuestId);
+			}
+		}
+		
+		return "admin";
 	}
 }
