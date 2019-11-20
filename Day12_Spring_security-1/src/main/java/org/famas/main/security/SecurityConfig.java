@@ -3,11 +3,8 @@ package org.famas.main.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -38,7 +35,7 @@ CustomAuthenticationFailureHandler authenticationFailureHandler;
 			.httpBasic().disable()
 			.authorizeRequests()
 			.antMatchers("/questionSavePage","/getUserById","/saveQuestionAnswers","/admin","/adminIndividualResults/*").hasAuthority("ROLE_ADMIN")
-			.antMatchers("/survey").hasAuthority("ROLE_USER")
+			.antMatchers("/survey","/").hasAuthority("ROLE_USER")
 			//.antMatchers("/getAll").permitAll()
 			.antMatchers("/**").permitAll()
 			//.antMatchers("/resources/static/**").permitAll()

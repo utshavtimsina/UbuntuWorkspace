@@ -1,8 +1,6 @@
 package org.famas.main.repo;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.famas.main.model.Answer;
 import org.famas.main.model.Question;
 import org.famas.main.model.SubQuestion;
