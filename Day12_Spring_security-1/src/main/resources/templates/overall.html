@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+	position: relative;
+	font-size: 20px;
+}
+
+th {
+	width: 90px;
+	border: 2px solid white;
+	text-align: center;
+}
+
+table {
+	position: relative;
+	background-color: white;
+}
+.horizontal{
+display:none;
+}
+
+#div {
+	margin: auto;
+	background-color: white;
+	height: 50%;
+	max-width: 60%;
+}
+
+hr {
+	background-color: black;
+}
+
+td {
+	vertical-align: top;
+	padding: 5px;
+}
+
+input[type="radio"] {
+	vertical-align: bottom;
+	width: 17px;
+	height: 17px;
+}
+
+input[type="checkbox"] {
+	vertical-align: bottom;
+	width: 17px;
+	height: 17px;
+}
+
+#Fname {
+	float: right;
+	font-size: 20px;
+	background-color: #85d8ed;
+}
+
+#fas{
+	//background:black;
+	transform:rotate(90deg);
+}
+#alternate{
+	background-color:black;
+	padding:8px;
+	display:inline;
+	
+}
+#vert{
+opacity:0.5;
+ /* box-shadow: 10px 12px 0.5rem #85d8ed;
+	background:white;
+outline-offset: -30px; */
+}
+</style>
+<meta charset="UTF-8">
+<title>Surveys</title>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+</head>
+<body>
+	
+		<div id="alternate">
+		<button type="button" id="vert" autofocus><i style='font-size:24px' id='fas'  class='fas'>&#xf039;</i></button>
+		<button type="button" id='horiz'><i style='font-size:24px'  class='fas'>&#xf039;</i></button>
+		</div>
+		<div id="div">
+		<form action="/survey" method="post">
+
+			<table class="table">
+
+
+			</table>
+			<input type="submit" class="submit" value="Submit">
+		</form>
+	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+						 var align =0;
+						
+							//$(".vertical").show();
+							 $("#vert").click(function(){
+									$("#horiz").css({"opacity":"1"});
+									$(".horizontal").hide();
+									$(".vertical").show();
+									$(this).css({"opacity":"0.5"});
+									align =0;
+							 });
+							 $("#horiz").click(function(){
+									$("#vert").css({"opacity":"1"});
+									$(".vertical").hide();
+									$(".horizontal").show();
+									$(this).css({"opacity":"0.5"});
+									
+							 });
+
+							
+
+							$
+									.get(
+											"/getAll",
+											function(data) {
+												//data = jQuery.parseJSON(data);
+												// $( "div" ).append( JSON.stringfy(data));
+												for (j = 0; j < data.length; j++) {
+													var x = '	<tr class="border">	<td>'
+															+ (j + 1)
+															+ '.&nbsp<td>';
+													x += data[j].qDescription
+															+ '</tr>	';
+													if (data[j].aType != "multiple") {
+															
+														
+														x+='<tr ><td><td><table class="vertical"><tr>';
+														for (i = 0; i < data[j].answer.length; i++) {
+															x += '<td id="change">'
+																	+ data[j].answer[i].aDescription+'';
+																var z;	
+																// /url= ;
+																$.ajax({
+																	 url :'/getCountByQuesAndAnsId?qid='+data[j].qId+'&aid='+data[j].answer[i].aId,
+																	 success : function (data) {
+																	 z = data;
+																	  },
+																	  async: false 
+																	});
+															// $.get("/getCountByQuesAndAnsId?qid="+data[j].qId+"&aid="+data[j].answer[i].aId,function(data){
+															// 	var event = new Event('data-submitted');
+															// 	 event.data = data; 
+															// 	 z.dispatchEvent(event);
+															// }).done(function(data){
+															// 	z= data;
+															// });
+															x+='<td><input size="1" disabled value="'+z+'"style="text-align:center;">';
+															
+														}
+														x+='</tr></table></tr>';
+														
+														// for (i = 0; i < data[j].answer.length; i++) {
+															
+														// 	x += '<tr ><td><td  class="horizontal">'
+														// 			+ data[j].answer[i].aDescription
+														// 			+ '<td class="horizontal"><input size="3" disabled></tr>';
+														// }
+														
+														x += '	<tr><td colspan="2"><hr></tr>';
+													} else {
+														x += '<tr><td></td><td><table border=1 frame=void rules=rows >';
+														var ans;
+														for (i = 0; i < data[j].subQuestion.length; i++) {
+															if (i == 0) {
+																x += '<tr><th colspan=2 style="background-color:#85d8ed; width:40%" >';
+																//alert(data[j].subQuestion[i].answer[0].adescription);
+																ans = data[j].subQuestion[i].answer.length;
+																for (k = 0; k < ans; k++) {
+
+																	x += '<th style="background-color:#85d8ed"> '
+																			+ data[j].subQuestion[i].answer[k].aDescription
+																			+ '</th>';
+																}
+																x += '</tr>';
+															}
+															//alert(data[j].subQuestion[i].answer[i].adescription);
+															x += '<tr><td>'
+																	+ data[j].subQuestion[i].qDescription
+																	+ '</td><td></td>';
+															for (k = 0; k < ans; k++) {
+																$.ajax({
+																	 url :'/getCountByQuesSubQuesAndAnsId?qid='+data[j].qId+'&subQid='+data[j].subQuestion[i].id+'&aid='+data[j].subQuestion[0].answer[k].aId,
+																	 success : function (data) {
+																		x += '<td><input size=3 disabled value="'+data+'"></td>';
+																	  },
+																	  async: false 
+																	});
+																
+															}
+															//x += '<tr><hr></tr>';
+															x += '</tr>';
+
+														}
+														x += '</table></td></tr>';
+
+														x += '<tr><td colspan="2"><hr></tr>';
+
+													}
+													x += '<tr><td><td align="right"><h3 align="left"><span style="vertical-align:top">Comments and suggestions: </span><textarea maxlength="255" name="commentC'+data[j].qId+'" cols="50" rows="3" style="border-top:none;border-right:none;border-left:none; " placeholder="Type your comments here"></textarea></h3></tr>';
+													$(".table").append(x);
+													//$("table").append(x);
+													//alert( );
+
+												}
+
+											});
+			
+						});
+		
+		
+	</script>
+</body>
+</html>

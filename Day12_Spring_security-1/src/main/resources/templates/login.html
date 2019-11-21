@@ -25,8 +25,11 @@ var url_string = window.location;
 var url = new URL(url_string);
 var error = url.searchParams.get("error");
 var user = url.searchParams.get("user");
-console.log(error);
-console.log(user);
+//console.log(error);
+//console.log(user);
+if(window.location.href.indexOf("logout") != -1){
+	alert("logout SuccessFull!!");
+}
 	if(user == "false"){
 		 document.getElementById("userMatch").style.display = "block";;
 			document.getElementById("passwordMatch").style.display = "none";

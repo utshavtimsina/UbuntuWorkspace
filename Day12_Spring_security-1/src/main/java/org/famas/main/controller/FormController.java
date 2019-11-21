@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequestMapping
@@ -157,9 +158,8 @@ public class FormController {
 	}
 
 	@GetMapping("/overall")
-	@ResponseBody
 	public Object generateOverallResult() {
-		return formService.generateOverallResult();
+		return "overall";
 	}
 
 	@GetMapping("/deleteQuestionAnswer")
@@ -189,5 +189,16 @@ public class FormController {
 		}
 		
 		return "admin";
+	}
+	@GetMapping("/getCountByQuesAndAnsId")
+	@ResponseBody
+	public int getCountByQuesAndAnsId(@RequestParam("qid") int qid ,@RequestParam int aid){
+		return qid;
+	} 
+
+	@GetMapping("/getCountByQuesSubQuesAndAnsId")
+	@ResponseBody
+	public int getCountByQuesSubQuesAndAnsId(@RequestParam int qid ,@RequestParam int  subQid ,@RequestParam int aid ){
+		return qid;
 	}
 }

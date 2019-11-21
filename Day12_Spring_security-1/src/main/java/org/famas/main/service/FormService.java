@@ -18,13 +18,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class FormService {
-	Jdbi jdbi;
 	FormRepo repo;
-
-	public FormService(Jdbi jdbi) {
-		// super();
-		this.jdbi = jdbi;
-		repo = jdbi.onDemand(FormRepo.class);
+	
+	public FormService(GenericJdbiClass<FormRepo> jdbiClass) {
+	
+		repo =(FormRepo) jdbiClass.getJdbiObject(FormRepo.class);
+		//repo = (FormRepo) jdbiClass.getObject();
 	}
 
 	public List<Question> getDefinedSql() {
