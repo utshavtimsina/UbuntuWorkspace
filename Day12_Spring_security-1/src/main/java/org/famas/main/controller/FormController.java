@@ -1,4 +1,7 @@
 package org.famas.main.controller;
+
+import java.util.List;
+
 import org.famas.main.mapper.QuestionAnswerSaveMapper;
 import org.famas.main.model.Answer;
 import org.famas.main.model.DeleteAnswerModel;
@@ -9,6 +12,7 @@ import org.famas.main.security.CustomUserDetails;
 import org.famas.main.service.FormService;
 import org.famas.main.util.Formatter;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.access.method.P;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -201,4 +205,41 @@ public class FormController {
 	public int getCountByQuesSubQuesAndAnsId(@RequestParam int qid ,@RequestParam int  subQid ,@RequestParam int aid ){
 		return qid;
 	}
+	@PostMapping("/updateQuestion")
+	@ResponseBody
+	public Object updateQuestions(@RequestBody List<Question> questions) {
+		if(questions != null) {
+			for(Question question :questions) {
+				formService.updateQuestion(question); 
+			}
+			return "Update Success!!!";
+		}
+		return "Update Failed!!!";
+	}
+	@PostMapping("/updateAnswers")
+	@ResponseBody
+	public Object updateAnswers(@RequestBody List<Answer> answers) {
+		if(answers != null) {
+			for(Answer answer :answers) {
+				formService.updateAnswer(answer); 
+			}
+			return "Update Success!!!";
+		}
+		return "Update Failed!!!";
+		
+	}
+	@PostMapping("/updateSubQuestions")
+	@ResponseBody
+	public Object updateSubQuestions(@RequestBody List<SubQuestion> subquestions) {
+		if(subquestions != null) {
+			for(SubQuestion subquestion :subquestions) {
+				formService.updateSubQuestion(subquestion); 
+			}
+			return "Update Success!!!";
+		}
+		return "Update Failed!!!";
+		
+	}
+
+
 }

@@ -11,7 +11,6 @@ import org.famas.main.model.Surveys;
 import org.famas.main.model.UserDto;
 import org.famas.main.repo.FormRepo;
 import org.famas.main.security.CustomUserDetails;
-import org.jdbi.v3.core.Jdbi;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -173,6 +172,27 @@ public class FormService {
 
 	public void deleteSubQuestionById(int id) {
 		repo.deleteSubQuestionById(id);
+	}
+
+	/**
+	 * @param question
+	 */
+	public void updateQuestion(Question question) {
+		repo.updateQuestion(question);
+	}
+
+	/**
+	 * @param answer
+	 */
+	public void updateAnswer(Answer answer) {
+		repo.updateAnswer(answer);
+	}
+
+	/**
+	 * @param subquestion
+	 */
+	public void updateSubQuestion(SubQuestion subquestion) {
+		repo.updateSubQuestion(subquestion);
 	}
 
 }

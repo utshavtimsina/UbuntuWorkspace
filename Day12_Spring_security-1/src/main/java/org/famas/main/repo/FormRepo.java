@@ -116,4 +116,23 @@ public interface FormRepo {
 
 	@SqlUpdate("DELETE FROM sub_question WHERE id = :id")
 	public void deleteSubQuestionById(@Bind int id);
+
+	/**
+	 * @param question
+	 */
+	@SqlUpdate("UPDATE question SET q_description = :qDescription WHERE q_id = :qId")
+	public void updateQuestion(@BindBean Question question);
+
+	/**
+	 * @param answer
+	 */
+	@SqlUpdate("UPDATE answer SET a_description = :aDescription WHERE a_id = :aId")
+	public void updateAnswer(@BindBean Answer answer);
+
+	/**
+	 * @param subquestion
+	 */
+	@SqlUpdate("UPDATE sub_question SET q_description = :qDescription WHERE id = :id")
+	public void updateSubQuestion(@BindBean SubQuestion subquestion);
+	
 }

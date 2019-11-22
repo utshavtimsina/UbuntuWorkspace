@@ -123,24 +123,23 @@ div.ui-dialog {position:fixed;}
 			 SendData = JSON.stringify(formData);
 			 //alert(SendData);
 			if(decide == 1){
+				if(SendData!= "{}"){
+					$.ajax({
+						type : "POST",
+						url : "/delete",
+						data : SendData,
+						//dataType : "json",
+						contentType : 'application/json',					
+						success:function(data){
+								//alert(JSON.stringify(data));
+								location.reload();
+								//$("body").html(data);
+						} 
+					});
+				}else alert("nodata");
+			}else{
+
 			
-				//alert(SendData);
-			if(SendData!= "{}"){
-			 $.ajax({
-				type : "POST",
-				url : "/delete",
-				data : SendData,
-				//dataType : "json",
-				contentType : 'application/json',					
-				success:function(data){
-						//alert(JSON.stringify(data));
-						location.reload();
-						//$("body").html(data);
-				} 
-			});
-			}
-			else alert("nodata");
-			}
 			
 			 if(formData.question!= null)
 				 {
@@ -169,35 +168,38 @@ div.ui-dialog {position:fixed;}
 			 		}
 			 
 			 }
-			 if(content.length >0 &&content.length<=4){
+			 if(content.length>4){
 				 //alert(content);
-				 edit(content,formData); 
+				  alert("Please Update no more than 4 field");
+				
+			 }else if(content.length <=0){
+				 alert("Please Select at least one item to edit ");
+			 }else{
+				 edit(content,formData);  
 			 }
-			 else{
-				 alert("Please Update no more than 4 field");
-			 }
-			 	 
-			// alert(SendData);
-			  
- 		
+			 
+		}
+	}
+				
+			 
 			 function edit(content,formData){
 				 
-				 $("#edit-dialog").show();
-				 
-				 for(i=0;i<content.length;i++){
-					 if(content[i].key.includes('question')){
-						var dat = content[i].key.split("question")
-						 $("#edit-dialog").append("<textarea cols=55 name=question."+dat[1]+" rows=4 id="+content[i].key+" style='resize:none'>"+content[i].value+"</textarea>"); 
-					 }else if(content[i].key.includes('answer')){
-							var dat = content[i].key.split("answer")
-							 $("#edit-dialog").append("<textarea cols=55 name=answer."+dat[1]+" rows=4 id="+content[i].key+" style='resize:none'>"+content[i].value+"</textarea>"); 
-						 } else if(content[i].key.includes('sub')){
-								var dat = content[i].key.split("sub")
-								 $("#edit-dialog").append("<textarea cols=55 name=subquestion."+dat[1]+" rows=4 id="+content[i].key+" style='resize:none'>"+content[i].value+"</textarea>"); 
-							 }
-					
-				 }
-					$("#edit-dialog").dialog({	
+			 $("#edit-dialog").show();
+			 
+			 for(i=0;i<content.length;i++){
+				 if(content[i].key.includes('question')){
+					var dat = content[i].key.split("question")
+					 $("#edit-dialog").append("<textarea cols=45 name=question."+dat[1]+" rows=4 id="+content[i].key+" style='resize:none'>"+content[i].value+"</textarea>"); 
+				 }else if(content[i].key.includes('answer')){
+						var dat = content[i].key.split("answer")
+						 $("#edit-dialog").append("<textarea cols=50 name=answer."+dat[1]+" rows=4 id="+content[i].key+" style='resize:none'>"+content[i].value+"</textarea>"); 
+					 } else if(content[i].key.includes('sub')){
+							var dat = content[i].key.split("sub")
+							 $("#edit-dialog").append("<textarea cols=50 name=subquestion."+dat[1]+" rows=4 id="+content[i].key+" style='resize:none'>"+content[i].value+"</textarea>"); 
+						 }
+				
+			 }
+				$("#edit-dialog").dialog({	
 						
 						width: 600,
 						height: 'auto',
@@ -210,14 +212,8 @@ div.ui-dialog {position:fixed;}
 								text : "Update",
 								click : function(){
 									testing();
-									/* for(i =0; i<$('textarea').length;i++){
-										alert($('textarea').eq(i).attr('id'));
-										
-									} */
+									alert("Update Successfull!!!");
 									location.reload();
-									
-									
-								
 								}
 								
 							},
@@ -233,7 +229,7 @@ div.ui-dialog {position:fixed;}
 						]					
 					});
 				  
-				 };
+		 }
 		
 			
 	
@@ -246,20 +242,88 @@ div.ui-dialog {position:fixed;}
 								{
 									return { name: node.id, value: node.innerHTML };
 								}
-							}
-					);
-					 SendData = JSON.stringify(formData);
-					 alert(SendData);
-				}
-		}	
+							});
+					console.log(formData);
+					
+					 if(formData.question!= null)
+					 {
+						  questions=[];
+						 for(var key in formData.question ){
+							 questions.push(JSON.parse('{ "qId":'+key+',"qDescription":"'+formData.question[key]+'"}'));
+							
+						 
+						 }
+						 questions=JSON.stringify(questions);
+						 $.ajax({
+								type : "POST",
+								url : "/updateQuestion",
+								data :questions,
+								//dataType : "json",
+								contentType :'application/json',					
+								success:function(data){
+										//alert(JSON.stringify(data));
+										//alert(JSON.stringify(data));
+										//location.reload();
+										//$("body").html(data);
+								}								 
+							});
+					 }
+				
+				 if(formData.answer != null)
+				 {
+					 var answers=[];
+					 for(var key in formData.answer ){
+						 answers.push(JSON.parse('{ "aId":'+key+',"aDescription":"'+formData.answer[key]+'"}'));
+						
+					 
+					 }
+					 answers = JSON.stringify(answers)
+					  $.ajax({
+						type : "POST",
+						url : "/updateAnswers",
+						data :answers,
+						//dataType : "json",
+						contentType :'application/json',					
+						success:function(data){
+								//alert(JSON.stringify(data));
+								//alert(JSON.stringify(data));
+								//location.reload();
+								//$("body").html(data);
+						}
+					  });
+				 
+				 }
+				 
+				 if(formData.subquestion!= null)
+				 {
+					 var subquestions=[];
+					 for(var key in formData.subquestion){
+						 subquestions.push(JSON.parse('{ "id":'+key+',"qDescription":"'+formData.subquestion[key]+'"}'));
+						
+					 
+					 }
+					 subquestions = (JSON.stringify(subquestions));
+					 $.ajax({
+						type : "POST",
+						url : "/updateSubQuestions",
+						data :subquestions,
+						//dataType : "json",
+						contentType :'application/json',					
+						success:function(data){
+								//alert(JSON.stringify(data));
+								//alert(JSON.stringify(data));
+								//location.reload();
+								//$("body").html(data);
+						}
+					  });
+					 
+				 
+				 }
+				 
+		 }
+				 	
 	</script>
-	
-		<!-- <div id="alternate">
-		<button type="button" id="vert" autofocus><i style='font-size:24px' id='fas'  class='fas'>&#xf039;</i></button>
-		<button type="button" id='horiz'><i style='font-size:24px'  class='fas'>&#xf039;</i></button>
-	</div> -->
-	
-	<div id="div">
+<div id="div">
 	<h1 align=center>Delete Questions and Answers</h1>
 		<form id="testForm">
 
@@ -269,7 +333,7 @@ div.ui-dialog {position:fixed;}
 			</table>
 			
 		</form>
-	</div>
+</div>
 	
 	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -282,33 +346,9 @@ div.ui-dialog {position:fixed;}
 						function() {
 						 var align =0;
 						 $("#edit-dialog").hide();
-						
-							//$(".vertical").show();
-							//  $("#vert").click(function(){
-							// 		$("#horiz").css({"opacity":"1"});
-							// 		$(".horizontal").hide();
-							// 		$(".vertical").show();
-							// 		$(this).css({"opacity":"0.5"});
-							// 		align =0;
-							//  });
-							//  $("#horiz").click(function(){
-							// 		$("#vert").css({"opacity":"1"});
-							// 		$(".vertical").hide();
-							// 		$(".horizontal").show();
-							// 		$(this).css({"opacity":"0.5"});
-									
-							//  });
-
-							$.get("/getAuthenticatedFname", function(data) {
-								//alert(data); 
-								//master changes
-								//branch changes
-								//changes by master
-								//agai
+						$.get("/getAuthenticatedFname", function(data) {
 								$("#Fname").prepend("User: " + data);
 							});
-							
-							
 							$.get("/getAll",function(data) {
 												//data = jQuery.parseJSON(data);
 												// $( "div" ).append( JSON.stringfy(data));
@@ -379,18 +419,6 @@ div.ui-dialog {position:fixed;}
 			
 						});
 		
-		/* $(".table").on("click","#check",function(){
-			//alert("clicked");
-			$(this).parent().prev().css({
-					
-				'border' : '1px solid black'
-			
-			});
-		 	
-			
-		
-		});*/
-		
 		$(".table").on("click",".check",function(){
 			$(this).parent().prev().toggleClass("borderClass");
 		});
@@ -408,7 +436,6 @@ div.ui-dialog {position:fixed;}
 			
 			
 		});
-		
 		
 	</script>
 </body>
