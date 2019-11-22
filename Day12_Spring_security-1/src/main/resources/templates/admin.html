@@ -104,11 +104,13 @@ div.ui-dialog {position:fixed;}
 	<a href="/graph">See graph</a>
 	</div>	
   	<div id="edit-dialog"></div>
+  	
+  	
+  	<!-- --Script started-- -->
 		<script type="text/javascript" src="../src/form2js.js"></script>
 		<script type="text/javascript">
 	var SendData;
-		function test()
-		{
+		function test(decide){
 			var content=[];
 			var formData = form2js('testForm', '.', true,
 					function(node)
@@ -120,6 +122,26 @@ div.ui-dialog {position:fixed;}
 					});
 			 SendData = JSON.stringify(formData);
 			 //alert(SendData);
+			if(decide == 1){
+			
+				//alert(SendData);
+			if(SendData!= "{}"){
+			 $.ajax({
+				type : "POST",
+				url : "/delete",
+				data : SendData,
+				//dataType : "json",
+				contentType : 'application/json',					
+				success:function(data){
+						//alert(JSON.stringify(data));
+						location.reload();
+						//$("body").html(data);
+				} 
+			});
+			}
+			else alert("nodata");
+			}
+			
 			 if(formData.question!= null)
 				 {
 				 	for(i=0;i<formData.question.length;i++)
@@ -150,90 +172,70 @@ div.ui-dialog {position:fixed;}
 			 if(content.length >0 &&content.length<=4){
 				 //alert(content);
 				 edit(content,formData); 
-			 }else
+			 }
+			 else{
 				 alert("Please Update no more than 4 field");
-			 
+			 }
+			 	 
+			// alert(SendData);
+			  
+ 		
 			 function edit(content,formData){
 				 
-			 $("#edit-dialog").show();
-			 
-			 for(i=0;i<content.length;i++){
-				 if(content[i].key.includes('question')){
-					var dat = content[i].key.split("question")
-					 $("#edit-dialog").append("<textarea cols=55 name=question."+dat[1]+" rows=4 id="+content[i].key+" style='resize:none'>"+content[i].value+"</textarea>"); 
-				 }else if(content[i].key.includes('answer')){
-						var dat = content[i].key.split("answer")
-						 $("#edit-dialog").append("<textarea cols=55 name=answer."+dat[1]+" rows=4 id="+content[i].key+" style='resize:none'>"+content[i].value+"</textarea>"); 
-					 } else if(content[i].key.includes('sub')){
-							var dat = content[i].key.split("sub")
-							 $("#edit-dialog").append("<textarea cols=55 name=subquestion."+dat[1]+" rows=4 id="+content[i].key+" style='resize:none'>"+content[i].value+"</textarea>"); 
-						 }
-				
-			 }
-				$("#edit-dialog").dialog({	
+				 $("#edit-dialog").show();
+				 
+				 for(i=0;i<content.length;i++){
+					 if(content[i].key.includes('question')){
+						var dat = content[i].key.split("question")
+						 $("#edit-dialog").append("<textarea cols=55 name=question."+dat[1]+" rows=4 id="+content[i].key+" style='resize:none'>"+content[i].value+"</textarea>"); 
+					 }else if(content[i].key.includes('answer')){
+							var dat = content[i].key.split("answer")
+							 $("#edit-dialog").append("<textarea cols=55 name=answer."+dat[1]+" rows=4 id="+content[i].key+" style='resize:none'>"+content[i].value+"</textarea>"); 
+						 } else if(content[i].key.includes('sub')){
+								var dat = content[i].key.split("sub")
+								 $("#edit-dialog").append("<textarea cols=55 name=subquestion."+dat[1]+" rows=4 id="+content[i].key+" style='resize:none'>"+content[i].value+"</textarea>"); 
+							 }
 					
-					width: 600,
-					height: 'auto',
-					draggable : false,					
-					title : "Edit:",
-					modal : true,
-					resizable:false,
-					buttons : [
-						{
-							text : "Update",
-							click : function(){
-								testing();
-								/* for(i =0; i<$('textarea').length;i++){
-									alert($('textarea').eq(i).attr('id'));
-									
-								} */
-								location.reload();
-								
-								
-							
-							}
-							
-						},
-						{
-							text : "Cancel",
-							click : function() {
-								$("#edit-dialog").html("");
-								$(this).dialog("close");
-								
-							}
-							}
+				 }
+					$("#edit-dialog").dialog({	
 						
-					]					
-				});
-			  }
+						width: 600,
+						height: 'auto',
+						draggable : false,					
+						title : "Edit:",
+						modal : true,
+						resizable:false,
+						buttons : [
+							{
+								text : "Update",
+								click : function(){
+									testing();
+									/* for(i =0; i<$('textarea').length;i++){
+										alert($('textarea').eq(i).attr('id'));
+										
+									} */
+									location.reload();
+									
+									
+								
+								}
+								
+							},
+							{
+								text : "Cancel",
+								click : function() {
+									$("#edit-dialog").html("");
+									$(this).dialog("close");
+									
+								}
+								}
+							
+						]					
+					});
+				  
+				 };
+		
 			
-			 
-			// alert(SendData);
-			 /* $.ajax({
-					type : "POST",
-					url : "/delete",
-					data : SendData,
-					//dataType : "json",
-					contentType : 'application/json',					
-					success:function(data){
-							//alert(JSON.stringify(data));
-							//location.reload();
-							$("body").html(data);
-					}
-				});
- */		}
-	
-			
-			
-			
-			/* $(document).on("click",function(){
-				$.ajax({
-					type : "POST",
-					url : "/user",
-					data : datas,
-					dataType : "json",
-					contentType : 'application/json'					
-				});	 */
 	
 				function testing(){
 					
@@ -244,11 +246,12 @@ div.ui-dialog {position:fixed;}
 								{
 									return { name: node.id, value: node.innerHTML };
 								}
-							});
+							}
+					);
 					 SendData = JSON.stringify(formData);
 					 alert(SendData);
 				}
-		
+		}	
 	</script>
 	
 		<!-- <div id="alternate">
@@ -258,7 +261,7 @@ div.ui-dialog {position:fixed;}
 	
 	<div id="div">
 	<h1 align=center>Delete Questions and Answers</h1>
-		<form id="testForm" action="javascript:test()" >
+		<form id="testForm">
 
 			<table class="table">
 
@@ -310,7 +313,7 @@ div.ui-dialog {position:fixed;}
 												//data = jQuery.parseJSON(data);
 												// $( "div" ).append( JSON.stringfy(data));
 												for (j = 0; j < data.length; j++) {
-													var x = '<tr><td><td class="editor" ><button type = submit class="edit"><i class="fas fa-edit"></i></button><td><button name="" type=submit class="delete" ><i class="fas fa-trash"></i> </button></tr><tr class="border">	<td>'
+													var x = '<tr><td><td class="editor" ><button type = button class="edit" onclick="test(0)"><i class="fas fa-edit"></i></button><td><button name="" type=button class="delete" onclick="test(1)"><i class="fas fa-trash"></i> </button></tr><tr class="border">	<td>'
 														x+=	'&nbsp<td id="question'+data[j].qId+'">';
 															
 													x += data[j].qDescription
@@ -331,7 +334,7 @@ div.ui-dialog {position:fixed;}
 														if(data[j].subQuestion.length != 0){
 														x += '<tr><td></td><td><table   ><tr><td><td>';
 														for(t=0 ;t<data[j].subQuestion[0].answer.length; t++){
-															x+='<td align=center><input type="checkbox" name="answer[]" value="'+data[j].subQuestion[0].answer[t].aId+'">';
+															x+='<td align=center><input class="subAnsCheckbox" type="checkbox" name="answer[]" value="'+data[j].subQuestion[0].answer[t].aId+'">';
 														}
 														x+='</tr>';
 														var ans;
@@ -393,9 +396,16 @@ div.ui-dialog {position:fixed;}
 		});
 			
 		$(".table").on("click",".subQues",function(){
-			//$(this).parent().next().toggleClass("borderClass");
-			alert($(this).parent().parent().index());
-			//alert($(this).parent().parent().index()+1);
+			$(this).parent().next().toggleClass("borderClass");
+			
+			
+		});
+		
+		$(".table").on("click",".subAnsCheckbox",function(){
+			var cellIndex = $(this).parent().index()-1;
+			//alert(cellIndex);
+			  $(this).closest('tr').next().children().eq(cellIndex).toggleClass("borderClass");
+			
 			
 		});
 		
